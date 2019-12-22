@@ -5,8 +5,8 @@ Rails.application.routes.draw do
       # modify routes of show and destroy by adding id parameter - id holds identification no.
       get 'tasks/index'
       post 'tasks/create'
-      get '/show/:id', to: 'recipes#show'
-      delete 'tasks/destroy'
+      get '/show/:id', to: 'tasks#show'
+      delete '/destroy/:id', to: 'tasks#destroy'
     end
   end
   root 'homepage#index'

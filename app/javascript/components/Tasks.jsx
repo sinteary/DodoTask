@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class Task extends React.Component {
+class Tasks extends React.Component {
   constructor(props) {
-    //initialising a state object that holds state of recipes
+    //initialising a state object that holds state of tasks
     //on initialisation: empty array
     super(props);
     this.state = {
@@ -13,8 +13,8 @@ class Task extends React.Component {
 
   //React lifecycle method: called immediately after component is mounted
   componentDidMount() {
-      const url = "/api/v1/recipes/index";
-      //make a HTTP call to fetch all recipes using the Fetch API
+      const url = "/api/v1/tasks/index";
+      //make a HTTP call to fetch all tasks using the Fetch API
       fetch(url)
         .then(response => {
           if (response.ok) {
@@ -22,7 +22,7 @@ class Task extends React.Component {
           }
           throw new Error("Network response was not ok!")
         })
-        //if response successful: application saves array of recipes to recipe state
+        //if response successful: application saves array of tasks to task state
         .then(response => this.setState({ tasks: response }))
         //if error: redirect to homepage
         .catch(() => this.props.history.push("/"));
@@ -66,7 +66,7 @@ class Task extends React.Component {
               </Link>
             </div>
             <div className="row">
-              {tasks.length > 0 ? allTasks : noTasks}
+              {tasks.length > 0 ? allTasks : noTask}
             </div>
             <Link to="/" className="btn btn-link">
               Home
