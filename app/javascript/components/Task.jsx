@@ -8,6 +8,7 @@ class Task extends React.Component {
       this.state = { task: {details: ""} };
       //method to make the state object accessible within component
       this.addHtmlEntities = this.addHtmlEntities.bind(this);
+      this.deleteTask = this.deleteTask.bind(this);
   }
 
   
@@ -40,6 +41,36 @@ class Task extends React.Component {
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">");
   }
+
+
+  deleteTask() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+
+    const url = `/api/v1/destroy/${id}`;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+          "X-CSRF-Token": token,
+          "Content-Type": "application/json"
+        }
+      })    
+        .then(resonse => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Network response was not ok!");
+        })
+        .then(() => this.props.history.push("/tasks"))
+        .catch(error => console.log(error.message));
+  }
+
+
 
   //render: gets task from state, renders it on the page
   render() {
@@ -99,7 +130,7 @@ class Task extends React.Component {
 
             {/*Delete task button*/}
             <div className="col-sm-12 col-lg-2">
-              <button type="button" className="btn btn-danger">
+              <button type="button" className="btn btn-danger" onClick={this.deleteTask}>
                 Delete Task
               </button>
             </div>
