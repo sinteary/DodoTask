@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ModalButton from "./Modal/ModalButton";
 
 class Task extends React.Component {
   constructor(props) {
-      super(props);
-      //initialised a state object that holds state of recipe
-      this.state = { task: {details: ""} };
-      //method to make the state object accessible within component
-      this.addHtmlEntities = this.addHtmlEntities.bind(this);
-      this.deleteTask = this.deleteTask.bind(this);
+    super(props);
+    //initialised a state object that holds state of recipe
+    this.state = { task: { details: "" }, showConfirmDelete: false };
+    //method to make the state object accessible within component
+    this.addHtmlEntities = this.addHtmlEntities.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
-  
   componentDidMount() {
     //accesses the id param from the "match" key of the props object
     const {
@@ -43,6 +43,13 @@ class Task extends React.Component {
   }
 
 
+  toggleConfirmationPopup() {
+    this.setState({
+      showConfirmDelete: !this.state.showConfirmDelete
+    });
+  }
+
+
   deleteTask() {
     const {
       match: {
@@ -54,20 +61,20 @@ class Task extends React.Component {
     const token = document.querySelector('meta[name="csrf-token"]').content;
 
     fetch(url, {
-        method: "DELETE",
-        headers: {
-          "X-CSRF-Token": token,
-          "Content-Type": "application/json"
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resonse => {
+        if (response.ok) {
+          return response.json();
         }
-      })    
-        .then(resonse => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok!");
-        })
-        .then(() => this.props.history.push("/tasks"))
-        .catch(error => console.log(error.message));
+        throw new Error("Network response was not ok!");
+      })
+      .then(() => this.props.history.push("/tasks"))
+      .catch(error => console.log(error.message));
   }
 
 
@@ -88,9 +95,9 @@ class Task extends React.Component {
         ))
     }
     */
-    
+
     const description = this.addHtmlEntities(task.description);
-    
+
     return (
       <div className="">
         <div className="hero position-relative d-flex align-items-center justify-content-center">
@@ -106,7 +113,7 @@ class Task extends React.Component {
             {task.name}
           </h1>
         </div>
-        
+
         <div className="container py-5">
           <div className="row">
             {/* subtasks list:
@@ -125,14 +132,29 @@ class Task extends React.Component {
                 dangerouslySetInnerHTML={{
                   __html: `${description}`
                 }}
-                />
+              />
             </div>
 
-            {/*Delete task button*/}
+            <div>
+              <ModalButton
+                text = "Delete task"
+                confirm={this.deleteTask.bind(this)}
+              />
+           
+            {/*}
             <div className="col-sm-12 col-lg-2">
-              <button type="button" className="btn btn-danger" onClick={this.deleteTask}>
+              <button type="button" className="btn btn-danger"
+                onClick={this.toggleConfirmationPopup.bind(this)}>
                 Delete Task
               </button>
+              {this.state.showConfirmDelete ?
+                <Modal
+                  text={"Are you sure you want to delete this task?"}
+                  confirm={this.deleteTask.bind(this)}
+                  cancel={this.toggleConfirmationPopup.bind(this)}
+                />
+                : null
+              }*/}
             </div>
           </div>
 
