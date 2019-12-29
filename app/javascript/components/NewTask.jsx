@@ -7,7 +7,8 @@ class NewTask extends React.Component {
     this.state = {
       //initialise empty fields
       name: "",
-      description: ""
+      description: "",
+      done: false
       //subtasks: ""
     };
 
@@ -36,7 +37,7 @@ class NewTask extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const url = "/api/v1/tasks/create";
-    const { name, description } = this.state;
+    const { name, description, done } = this.state;
 
     if (name.length == 0)
       return;
