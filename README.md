@@ -1,9 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## CVWO 2020 Assignment
 
-Things you may want to cover:
+##### Name:
+Cynthia Lee Weng Yan
+
+##### Matriculation Number: 
+A0190363H
 
 * Ruby version
 
