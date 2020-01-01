@@ -61,7 +61,7 @@ class Task extends React.Component {
           "Content-Type": "application/json"
         }
       })    
-        .then(resonse => {
+        .then(response => {
           if (response.ok) {
             return response.json();
           }

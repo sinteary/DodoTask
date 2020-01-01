@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Checkbox } from "semantic-ui-react";
+import Axios from "axios";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -12,21 +13,44 @@ class Tasks extends React.Component {
     };
   }
 
+  getTasks() {
+    const url = "/api/v1/tasks/index";
+    //make a HTTP call to fetch all tasks using the Fetch API
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok!")
+      })
+      //if response successful: application saves array of tasks to task state
+      .then(response => this.setState({ tasks: response }))
+      //if error: redirect to homepage
+      .catch(() => this.props.history.push("/"));
+  }
+
+  markTaskDone = (e, id) => {
+    console.log("checked done")
+    const url = `/api/v1/tasks/${id}`
+    Axios.put( url, {done: e.target.checked} )
+    .then(response => {
+      console.log(response.data)
+      //console.log(e.target.checked)
+      /*const taskIndex = this.state.tasks.findIndex(x => x.id === response.data.id)
+      const tasks = update(this.state.tasks, {
+        [taskIndex]: {$set: response.data}
+      })
+      this.setState({
+        tasks: tasks
+      })
+      console.log("refreshed")*/
+    })
+    .catch(error => console.log(error))
+  }
+
   //React lifecycle method: called immediately after component is mounted
   componentDidMount() {
-      const url = "/api/v1/tasks/index";
-      //make a HTTP call to fetch all tasks using the Fetch API
-      fetch(url)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok!")
-        })
-        //if response successful: application saves array of tasks to task state
-        .then(response => this.setState({ tasks: response }))
-        //if error: redirect to homepage
-        .catch(() => this.props.history.push("/"));
+     this.getTasks();
   }
 
   render() {
@@ -37,11 +61,13 @@ class Tasks extends React.Component {
           <div className="card-body">
               <h5 className="card-title">{task.name}</h5>
               <p>{task.description}</p>
-              <div class="ui checkbox"
-                defaultChecked="false"
-                //onChange={}
-              >
+              <div>
+                <input className="done-checkbox" type="checkbox"
+                  checked={task.done}
+                  onChange={
+                    (e) => this.markTaskDone(e, task.id)}/>
                 <label>Done</label>
+                <p>{task.done ? "task is done" : "nah"} </p>
               </div>
               <Link to={`/task/${task.id}`} className="btn custom-button"> View Task </Link>
           </div>
@@ -49,6 +75,8 @@ class Tasks extends React.Component {
       </div>
 
     ));
+
+    //If no tasks
     const noTask = (
       <div className="vw-100 vh-50 d-flex alighn-items-center justify-content-center">
         <h4>

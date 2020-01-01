@@ -1,4 +1,6 @@
 class Api::V1::TasksController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
   def index
     task = Task.all.order(created_at: :desc)
     render json: task
@@ -21,6 +23,12 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def edit
+    task = Task.find(params[:id])
+    task.update_attributes(task_params)
+    render json: task
+  end
+
   def destroy
     task&.destroy
     render json: { message: 'Task deleted!' }
@@ -28,7 +36,7 @@ class Api::V1::TasksController < ApplicationController
 
   private
   def task_params
-    params.permit(:name, :description)
+    params.permit(:name, :description, :done)
   end
 
   def task

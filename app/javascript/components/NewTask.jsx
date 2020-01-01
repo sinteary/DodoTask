@@ -8,7 +8,7 @@ class NewTask extends React.Component {
       //initialise empty fields
       name: "",
       description: "",
-      done: false
+      done: null
       //subtasks: ""
     };
 
@@ -48,7 +48,8 @@ class NewTask extends React.Component {
     const body = {
       name,
       //replaces every new line character in instruction with a break tag to retain text format entered by user
-      description: description.replace(/\n/g, "<br> <br>")
+      description: description.replace(/\n/g, "<br> <br>"),
+      done: false
     };
 
     const token= document.querySelector('meta[name="csrf-token"]').content;
