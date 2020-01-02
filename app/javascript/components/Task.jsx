@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Radio } from 'semantic-ui-react';
-
 class Task extends React.Component {
   constructor(props) {
       super(props);

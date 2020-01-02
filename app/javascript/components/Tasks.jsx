@@ -30,20 +30,12 @@ class Tasks extends React.Component {
   }
 
   markTaskDone = (e, id) => {
-    console.log("checked done")
+    console.log("checked done for task ${id}")
     const url = `/api/v1/tasks/${id}`
     Axios.put( url, {done: e.target.checked} )
     .then(response => {
       console.log(response.data)
-      //console.log(e.target.checked)
-      /*const taskIndex = this.state.tasks.findIndex(x => x.id === response.data.id)
-      const tasks = update(this.state.tasks, {
-        [taskIndex]: {$set: response.data}
-      })
-      this.setState({
-        tasks: tasks
-      })
-      console.log("refreshed")*/
+      this.getTasks()
     })
     .catch(error => console.log(error))
   }
@@ -63,13 +55,18 @@ class Tasks extends React.Component {
               <p>{task.description}</p>
               <div>
                 <input className="done-checkbox" type="checkbox"
-                  checked={task.done}
                   onChange={
-                    (e) => this.markTaskDone(e, task.id)}/>
+                    (e) => this.markTaskDone(e, task.id)}
+                    checked={task.done}/>
                 <label>Done</label>
-                <p>{task.done ? "task is done" : "nah"} </p>
               </div>
-              <Link to={`/task/${task.id}`} className="btn custom-button"> View Task </Link>
+              <button type="button" className="btn custom-button" onClick={this.editTask}>
+                Edit
+              </button>
+              <button type="button" className="btn btn-danger" onClick={this.deleteTask}>
+                Delete
+              </button>
+              {/*<Link to={`/task/${task.id}`} className="btn custom-button"> View Task </Link*/}
           </div>
         </div>
       </div>

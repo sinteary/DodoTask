@@ -8,7 +8,7 @@ class NewTask extends React.Component {
       //initialise empty fields
       name: "",
       description: "",
-      done: null
+      done: false
       //subtasks: ""
     };
 
