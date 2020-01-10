@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 class Task extends React.Component {
   constructor(props) {
       super(props);
@@ -52,13 +53,11 @@ class Task extends React.Component {
     const url = `/api/v1/destroy/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
 
-    fetch(url, {
-        method: "DELETE",
-        headers: {
-          "X-CSRF-Token": token,
+    Axios.delete(url,
+      {headers: {
+        "X-CSRF-Token": token,
           "Content-Type": "application/json"
-        }
-      })    
+      }},)
         .then(response => {
           if (response.ok) {
             return response.json();

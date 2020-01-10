@@ -30,8 +30,10 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def destroy
-    task&.destroy
-    render json: { message: 'Task deleted!' }
+    task = Task.find(params[:id])
+    task.destroy
+    head :no_content, status: :ok
+    #render json: { message: 'Task deleted!' }
   end
 
   private

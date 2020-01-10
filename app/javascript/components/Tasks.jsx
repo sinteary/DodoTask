@@ -40,6 +40,25 @@ class Tasks extends React.Component {
     .catch(error => console.log(error))
   }
 
+  deleteTask = (id) => {
+    console.log("delete triggered")
+    const url = `/api/v1/tasks/${id}`;
+    //const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    Axios.delete(url /*, {
+        headers: {
+          "X-CSRF-Token": token,
+          "Content-Type": "application/json"
+        }
+      }*/)    
+        .then(response => {
+          this.getTasks()
+        })
+        //.then(() => this.props.history.push("/tasks"))
+        .catch(error => console.log(error.message));
+  }
+
+
   //React lifecycle method: called immediately after component is mounted
   componentDidMount() {
      this.getTasks();
@@ -60,13 +79,14 @@ class Tasks extends React.Component {
                     checked={task.done}/>
                 <label>Done</label>
               </div>
-              <button type="button" className="btn custom-button" onClick={this.editTask}>
+              <button type="button" className="btn custom-button" onClick={ () => this.editTask}>
                 Edit
               </button>
-              <button type="button" className="btn btn-danger" onClick={this.deleteTask}>
+              <button type="button" className="btn btn-danger" onClick={ () => 
+                this.deleteTask(task.id)}>
                 Delete
               </button>
-              {/*<Link to={`/task/${task.id}`} className="btn custom-button"> View Task </Link*/}
+              {/*<Link to={`/task/${task.id}`} className="btn cust om-button"> View Task </Link*/}
           </div>
         </div>
       </div>
