@@ -50,3 +50,35 @@
     width: 100%;
     opacity: 0.4;
   }
+
+  .done-checkbox {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    border: 1px solid;
+    border-color: grey;
+    background-color: rgb(212, 208, 208);
+    border-radius: 3px;
+  }
+
+  .done-checkbox:checked {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    border:1px solid;
+    border-color: rgb(27, 172, 47);
+    background-color: #b1ebb1;
+    border-radius: 3px;
+  }
+
+  .done-checkbox:checked:after {
+    content:'\2714';
+    font-size: 13px;
+    color: #1f1f29;
+    position: absolute;
+  }
+
+  .task-label {
+    padding-left: 10px;
+    font-size: 16px;
+  }

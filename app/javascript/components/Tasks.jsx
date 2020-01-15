@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Checkbox } from "semantic-ui-react";
+import { Checkbox, Label } from "semantic-ui-react";
 import Axios from "axios";
 
 class Tasks extends React.Component {
@@ -16,17 +16,14 @@ class Tasks extends React.Component {
   getTasks() {
     const url = "/api/v1/tasks/index";
     //make a HTTP call to fetch all tasks using the Fetch API
-    fetch(url)
+    Axios.get(url)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok!")
+        console.log(response.data);
+        this.setState({ tasks: response.data });
+        console.log(tasks);
       })
-      //if response successful: application saves array of tasks to task state
-      .then(response => this.setState({ tasks: response }))
-      //if error: redirect to homepage
-      .catch(() => this.props.history.push("/"));
+        //if error: redirect to homepage
+        .catch(() => this.props.history.push("/tasks"));
   }
 
   markTaskDone = (e, id) => {
@@ -61,24 +58,23 @@ class Tasks extends React.Component {
 
   //React lifecycle method: called immediately after component is mounted
   componentDidMount() {
-     this.getTasks();
+    this.getTasks();
   }
 
   render() {
     const { tasks } = this.state;
-    const allTasks = tasks.map((task, index) => (
-      <div key={index} className="col-md-6 cos-lg-4">
+    const allTasks = tasks.map( task => (
+      <div key={task.id} className="col-md-6 cos-lg-4">
         <div className="card mb-4">
           <div className="card-body">
-              <h5 className="card-title">{task.name}</h5>
-              <p>{task.description}</p>
-              <div>
-                <input className="done-checkbox" type="checkbox"
-                  onChange={
-                    (e) => this.markTaskDone(e, task.id)}
-                    checked={task.done}/>
-                <label>Done</label>
+            <div>
+              <div class="task-checkbox">
+                <input type="checkbox" class="done-checkbox"
+                  onChange={(e) => this.markTaskDone(e, task.id)}
+                  checked={task.done}/>
+                <label class = "task-label" for="checkbox">{task.name}</label>
               </div>
+              <p>{task.description}</p>
               <button type="button" className="btn custom-button" onClick={ () => this.editTask}>
                 Edit
               </button>
@@ -86,11 +82,10 @@ class Tasks extends React.Component {
                 this.deleteTask(task.id)}>
                 Delete
               </button>
-              {/*<Link to={`/task/${task.id}`} className="btn cust om-button"> View Task </Link*/}
+            </div>
           </div>
         </div>
       </div>
-
     ));
 
     //If no tasks
@@ -104,12 +99,12 @@ class Tasks extends React.Component {
 
     return (
       <>
-        <section className="jumbotron jumbotron-fluid text-center">
+        {/* <section className="jumbotron jumbotron-fluid text-center">
           <div className="container py-5">
-            <h1 className="display-4">All tasks</h1>
+            <h1 className="display-4">All tasks here</h1>
             <p className="lead text-muted">Here are all the tasks that you have added:</p>
           </div>
-        </section>
+        </section> */}
       
         <div className="py-5">
           <main className="container">

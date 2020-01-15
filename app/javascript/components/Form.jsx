@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class NewTask extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +9,6 @@ class NewTask extends React.Component {
       name: "",
       description: "",
       done: false
-      //subtasks: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -81,7 +80,7 @@ class NewTask extends React.Component {
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
             <h1 className="font-weight-normal mb-5">
-              Add a new task to the list
+              {this.props.type == "submit" ? "Make new" : "Edit"}
             </h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
@@ -92,10 +91,7 @@ class NewTask extends React.Component {
                   id="taskName"
                   className="form-control"
                   required
-                  onChange={(data) => {
-                    console.log(data);
-                    this.onChange(data);
-                  }}
+                  onChange={this.onChange}
                 />
               </div>
               <div className="form-group">
@@ -127,4 +123,7 @@ class NewTask extends React.Component {
 
 }
 
-export default NewTask;
+export default Form;
+
+
+}
