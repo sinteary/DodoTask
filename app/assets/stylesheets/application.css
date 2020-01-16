@@ -95,3 +95,12 @@
   flex-direction: row;
 
 }
+
+.create-button {
+  background-color: #0a448f;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  padding-bottom: 5px;
+
+}

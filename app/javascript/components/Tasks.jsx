@@ -11,7 +11,9 @@ class Tasks extends React.Component {
     //on initialisation: empty array
     super(props);
     this.state = {
-      tasks: []
+      tasks: [],
+      editing: false,
+      taskid: null
     };
 
     this.getTasks = this.getTasks.bind(this)
@@ -29,7 +31,6 @@ class Tasks extends React.Component {
         .catch(error => {
           console.log(error);
           this.props.history.push("/tasks");
-          
       });
   }
 
@@ -60,6 +61,13 @@ class Tasks extends React.Component {
         .catch(error => console.log(error.message));
   }
 
+  editTask= (id) => {
+     this.setState({
+      editing: !this.state.editing,
+      taskid: id
+    })
+  }
+
 
   //React lifecycle method: called immediately after component is mounted
   componentDidMount() {
@@ -80,8 +88,8 @@ class Tasks extends React.Component {
                 <label className= "task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <Button fluid floated="right" icon="alternate trash" onClick={() => this.deleteTask(task.id)}/>
-              <ButtonIcon icontype="alternate pencil" onClick={() => console.log("edit pressed")}/>
+              {/* <Button fluid floated="right" icon="alternate trash" onClick={() => this.deleteTask(task.id)}/> */}
+              <ButtonIcon icontype="alternate pencil" onClick={() => this.editTask(task.id)}/>
               <ButtonIcon icontype="alternate trash" btncolor={"red"} onClick={ () => this.deleteTask(task.id)}/>
             </div>
           </div>
@@ -102,7 +110,10 @@ class Tasks extends React.Component {
       <>
         <div className="homepage"> 
           <div className="side-taskbar">
-            <NewTask refresh={this.getTasks}></NewTask>
+            <NewTask 
+              taskid={this.state.taskid}
+              editing={this.state.editing}
+              refresh={this.getTasks}></NewTask>
           </div>
           <div>
           <main className="container">

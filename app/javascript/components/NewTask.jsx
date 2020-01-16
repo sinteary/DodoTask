@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 class NewTask extends React.Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class NewTask extends React.Component {
       name: "",
       description: "",
       done: false
-      //subtasks: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -41,10 +41,8 @@ class NewTask extends React.Component {
 
     if (name.length == 0)
       return;
-
-    /*
-    builds an object containing parameters required by task controller to create new task
-    */
+    
+    //builds an object containing parameters required by task controller to create new task
     const body = {
       name,
       //replaces every new line character in instruction with a break tag to retain text format entered by user
@@ -64,15 +62,27 @@ class NewTask extends React.Component {
       },
       body: JSON.stringify(body)
     })
-      // .then(response => {
-      //   if(response.ok) {
-      //     return response.json();
-      //   }
-      //   throw new Error("Network response was not ok.");
-      // })
-      //if task successfully created: redirect user to task page to view
       .then(() => this.props.refresh())
       .catch(error => console.log(error.message));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.editing !== prevProps.editing) {
+      console.log("changed")
+      if(this.props.editing) {
+        console.log(this.props.taskid);
+        const url = `/api/v1/tasks/${this.props.taskid}`
+        Axios.get(url)
+          .then( response => {
+            console.log(response)            
+          })
+        }
+      } 
+      else {
+        this.state.name = "";
+        this.state.description = "";
+        this.state.done = false;
+      }  
   }
 
   render() {
@@ -80,9 +90,9 @@ class NewTask extends React.Component {
       <div className="container mt-5">
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
-            <h1 className="font-weight-normal mb-5">
-              Add a new task to the list
-            </h1>
+            <h2 className="font-weight-normal mb-5">
+              {this.props.editing ? "Editing task:" : "Add new task:"}
+            </h2>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="taskName">Task name</label>
@@ -92,10 +102,11 @@ class NewTask extends React.Component {
                   id="taskName"
                   className="form-control"
                   required
+                  value={this.state.name}
                   onChange={(data) => {
-                    console.log(data);
                     this.onChange(data);
                   }}
+                  
                 />
               </div>
               <div className="form-group">
@@ -107,17 +118,19 @@ class NewTask extends React.Component {
                   id="taskDescription"
                   className="form-control"
                   onChange={this.onChange}
+                  value={this.state.description}
+                  
                 />
                 <small id="descriptionHelp" className="form-text text-muted">
                   This field is optional.
                 </small>
               </div>
-              <button type="submit" className="btn custom-button mt-3">
+              <button type="submit" className="btn custom-button" onClick={() => this.onSubmit}>
                 Create Task
               </button>
-              <Link to="/tasks" className="btn btn-link mt-3">
+              {/* <Link to="/tasks" className="btn btn-link mt-3">
                 Back to tasks
-              </Link>
+              </Link> */}
             </form>
           </div>
         </div>
