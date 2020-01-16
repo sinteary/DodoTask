@@ -30,15 +30,16 @@ class NewTask extends React.Component {
   corresponding key in state
   */
   onChange(event) {
+    console.log(event.target.name, event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   }
 
   //handles submission
-  onSubmit(event) {
-    event.preventDefault();
+  onSubmit() {
+    
     const url = "/api/v1/tasks/create";
-    const { name, description, done } = this.state;
-
+    const { name, description } = this.state;
+    console.log("create", name.length, this.state.name)
     if (name.length == 0)
       return;
     
@@ -62,7 +63,10 @@ class NewTask extends React.Component {
       },
       body: JSON.stringify(body)
     })
-      .then(() => this.props.refresh())
+      .then((response) => {
+        console.log(response);
+        this.props.refresh()
+      })
       .catch(error => console.log(error.message));
   }
 
@@ -71,18 +75,17 @@ class NewTask extends React.Component {
       console.log("changed")
       if(this.props.editing) {
         console.log(this.props.taskid);
-        const url = `/api/v1/tasks/${this.props.taskid}`
+        const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
           .then( response => {
-            console.log(response)            
+            console.log(response.data)
+            this.setState({
+              name: response.data.name,
+              
+            })            
           })
         }
-      } 
-      else {
-        this.state.name = "";
-        this.state.description = "";
-        this.state.done = false;
-      }  
+      }
   }
 
   render() {
@@ -93,7 +96,7 @@ class NewTask extends React.Component {
             <h2 className="font-weight-normal mb-5">
               {this.props.editing ? "Editing task:" : "Add new task:"}
             </h2>
-            <form onSubmit={this.onSubmit}>
+            <form>
               <div className="form-group">
                 <label htmlFor="taskName">Task name</label>
                 <input
@@ -125,7 +128,7 @@ class NewTask extends React.Component {
                   This field is optional.
                 </small>
               </div>
-              <button type="submit" className="btn custom-button" onClick={() => this.onSubmit}>
+              <button type="button" onClick={this.onSubmit} className="btn custom-button">
                 Create Task
               </button>
               {/* <Link to="/tasks" className="btn btn-link mt-3">
