@@ -71,7 +71,7 @@ class NewTask extends React.Component {
         throw new Error("Network response was not ok.");
       })
       //if task successfully created: redirect user to task page to view
-      .then(response => this.props.history.push(`/task/${response.id}`))
+      .then(() => this.props.refresh)
       .catch(error => console.log(error.message));
   }
 
