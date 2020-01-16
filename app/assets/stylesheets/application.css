@@ -14,71 +14,84 @@
  *= require_self
  */
 
- .bg_primary-color {
-    background-color: #FFFFFF;
-  }
-  .primary-color {
-    background-color: #FFFFFF;
-  }
-  .bg_secondary-color {
-    background-color: #116b11;
-  }
-  .secondary-color {
-    color: #1f1f29;
-  }
-  .custom-button.btn {
-    background-color: #0a448f;
-    color: #FFF;
-    border: none;
-  }
-  .custom-button.btn:hover {
-    color: #FFF !important;
-    border: none;
-  }
-  .hero {
-    width: 100vw;
-    height: 50vh;
-  }
-  .hero img {
-    object-fit: cover;
-    object-position: top;
-    height: 100%;
-    width: 100%;
-  }
-  .overlay {
-    height: 100%;
-    width: 100%;
-    opacity: 0.4;
-  }
+.bg_primary-color {
+  background-color: #FFFFFF;
+}
+.primary-color {
+  background-color: #FFFFFF;
+}
+.bg_secondary-color {
+  background-color: #116b11;
+}
+.secondary-color {
+  color: #1f1f29;
+}
+.custom-button.btn {
+  background-color: #0a448f;
+  color: #FFF;
+  border: none;
+}
+.custom-button.btn:hover {
+  color: #FFF !important;
+  border: none;
+}
+.hero {
+  width: 100vw;
+  height: 50vh;
+}
+.hero img {
+  object-fit: cover;
+  object-position: top;
+  height: 100%;
+  width: 100%;
+}
+.overlay {
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+}
 
-  .done-checkbox {
-    -webkit-appearance: none;
-    height: 14px;
-    width: 14px;
-    border: 1px solid;
-    border-color: grey;
-    background-color: rgb(212, 208, 208);
-    border-radius: 3px;
-  }
+.done-checkbox {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgb(212, 208, 208);
+  border-radius: 3px;
+}
 
-  .done-checkbox:checked {
-    -webkit-appearance: none;
-    height: 14px;
-    width: 14px;
-    border:1px solid;
-    border-color: rgb(27, 172, 47);
-    background-color: #b1ebb1;
-    border-radius: 3px;
-  }
+.done-checkbox:checked {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border:1px solid;
+  border-color: rgb(27, 172, 47);
+  background-color: #b1ebb1;
+  border-radius: 3px;
+}
 
-  .done-checkbox:checked:after {
-    content:'\2714';
-    font-size: 13px;
-    color: #1f1f29;
-    position: absolute;
-  }
+.done-checkbox:checked:after {
+  content:'\2714';
+  font-size: 13px;
+  color: #1f1f29;
+  position: absolute;
+}
 
-  .task-label {
-    padding-left: 10px;
-    font-size: 16px;
-  }
+.task-label {
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.side-taskbar {
+  background-color: #a6c7f3;
+  width: 40%
+
+
+}
+
+.homepage {
+  display: flex;
+  flex-direction: row;
+
+}

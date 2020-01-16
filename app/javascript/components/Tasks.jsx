@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Checkbox, Label } from "semantic-ui-react";
 import Axios from "axios";
+import NewTask from "./NewTask";
+import ButtonIcon from "./Buttons/ButtonIcon";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -48,9 +50,7 @@ class Tasks extends React.Component {
           "Content-Type": "application/json"
         }
       }*/)    
-        .then(response => {
-          this.getTasks()
-        })
+        .then(this.getTasks())
         //.then(() => this.props.history.push("/tasks"))
         .catch(error => console.log(error.message));
   }
@@ -68,20 +68,15 @@ class Tasks extends React.Component {
         <div className="card mb-4">
           <div className="card-body">
             <div>
-              <div class="task-checkbox">
-                <input type="checkbox" class="done-checkbox"
+              <div className="task-checkbox">
+                <input type="checkbox" className="done-checkbox"
                   onChange={(e) => this.markTaskDone(e, task.id)}
                   checked={task.done}/>
-                <label class = "task-label" for="checkbox">{task.name}</label>
+                <label className= "task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <button type="button" className="btn custom-button" onClick={ () => this.editTask}>
-                Edit
-              </button>
-              <button type="button" className="btn btn-danger" onClick={ () => 
-                this.deleteTask(task.id)}>
-                Delete
-              </button>
+              <ButtonIcon icontype="alternate pencil" onClick={ () => this.editTask}/>
+              <ButtonIcon icontype="alternate trash" onClick={ () => this.deleteTask(task.id)}/>
             </div>
           </div>
         </div>
@@ -99,16 +94,13 @@ class Tasks extends React.Component {
 
     return (
       <>
-        {/* <section className="jumbotron jumbotron-fluid text-center">
-          <div className="container py-5">
-            <h1 className="display-4">All tasks here</h1>
-            <p className="lead text-muted">Here are all the tasks that you have added:</p>
+        <div className="homepage"> 
+          <div className="side-taskbar">
+            <NewTask refresh={() => this.getTasks()}></NewTask>
           </div>
-        </section> */}
-      
-        <div className="py-5">
+          <div>
           <main className="container">
-            <div className="text-right mb-3">
+            <div className="tasklist">
               <Link to="/task" className="btn custom-button">
                 Add a new task
               </Link>
@@ -120,6 +112,7 @@ class Tasks extends React.Component {
               Home
             </Link>
           </main>
+          </div>
         </div>
       </>
     );
