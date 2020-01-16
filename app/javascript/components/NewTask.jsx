@@ -64,14 +64,14 @@ class NewTask extends React.Component {
       },
       body: JSON.stringify(body)
     })
-      .then(response => {
-        if(response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok.");
-      })
+      // .then(response => {
+      //   if(response.ok) {
+      //     return response.json();
+      //   }
+      //   throw new Error("Network response was not ok.");
+      // })
       //if task successfully created: redirect user to task page to view
-      .then(() => this.props.refresh)
+      .then(() => this.props.refresh())
       .catch(error => console.log(error.message));
   }
 

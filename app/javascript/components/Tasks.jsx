@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Checkbox, Label } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import Axios from "axios";
 import NewTask from "./NewTask";
 import ButtonIcon from "./Buttons/ButtonIcon";
@@ -13,6 +13,8 @@ class Tasks extends React.Component {
     this.state = {
       tasks: []
     };
+
+    this.getTasks = this.getTasks.bind(this)
   }
 
   getTasks() {
@@ -22,10 +24,13 @@ class Tasks extends React.Component {
       .then(response => {
         console.log(response.data);
         this.setState({ tasks: response.data });
-        console.log(tasks);
       })
         //if error: redirect to homepage
-        .catch(() => this.props.history.push("/tasks"));
+        .catch(error => {
+          console.log(error);
+          this.props.history.push("/tasks");
+          
+      });
   }
 
   markTaskDone = (e, id) => {
@@ -50,7 +55,7 @@ class Tasks extends React.Component {
           "Content-Type": "application/json"
         }
       }*/)    
-        .then(this.getTasks())
+        .then(this.getTasks)
         //.then(() => this.props.history.push("/tasks"))
         .catch(error => console.log(error.message));
   }
@@ -75,8 +80,9 @@ class Tasks extends React.Component {
                 <label className= "task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
+              <Button fluid floated="right" icon="alternate trash" onClick={() => this.deleteTask(task.id)}/>
               <ButtonIcon icontype="alternate pencil" onClick={() => console.log("edit pressed")}/>
-              <ButtonIcon icontype="alternate trash" onClick={ () => this.deleteTask(task.id)}/>
+              <ButtonIcon icontype="alternate trash" btncolor={"red"} onClick={ () => this.deleteTask(task.id)}/>
             </div>
           </div>
         </div>
@@ -96,15 +102,10 @@ class Tasks extends React.Component {
       <>
         <div className="homepage"> 
           <div className="side-taskbar">
-            <NewTask refresh={() => this.getTasks()}></NewTask>
+            <NewTask refresh={this.getTasks}></NewTask>
           </div>
           <div>
           <main className="container">
-            <div className="tasklist">
-              <Link to="/task" className="btn custom-button">
-                Add a new task
-              </Link>
-            </div>
             <div className="row">
               {tasks.length > 0 ? allTasks : noTask}
             </div>
