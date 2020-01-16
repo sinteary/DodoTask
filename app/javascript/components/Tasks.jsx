@@ -75,7 +75,7 @@ class Tasks extends React.Component {
                 <label className= "task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <ButtonIcon icontype="alternate pencil" onClick={ () => this.editTask}/>
+              <ButtonIcon icontype="alternate pencil" onClick={() => console.log("edit pressed")}/>
               <ButtonIcon icontype="alternate trash" onClick={ () => this.deleteTask(task.id)}/>
             </div>
           </div>
