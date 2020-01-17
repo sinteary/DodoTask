@@ -25,7 +25,7 @@ class Tasks extends React.Component {
     Axios.get(url)
       .then(response => {
         console.log(response.data);
-        this.setState({ tasks: response.data });
+        this.setState({ tasks: response.data, editing: false });
       })
         //if error: redirect to homepage
         .catch(error => {
@@ -62,8 +62,8 @@ class Tasks extends React.Component {
   }
 
   editTask= (id) => {
-     this.setState({
-      editing: !this.state.editing,
+    this.setState({
+      editing: this.state.taskid === id? !this.state.editing : true,
       taskid: id
     })
   }
@@ -79,7 +79,7 @@ class Tasks extends React.Component {
     const allTasks = tasks.map( task => (
       <div key={task.id} className="col-md-6 cos-lg-4">
         <div className="card mb-4">
-          <div className="card-body">
+          <div className="car4d-body">
             <div>
               <div className="task-checkbox">
                 <input type="checkbox" className="done-checkbox"

@@ -2,18 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
-class NewTask extends React.Component {
+class TaskEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //initialise empty fields
       name: "",
       description: "",
-      done: false
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onEdit = this.onEdit.bind(this);
     this.stripHtmlEntities = this.stripHtmlEntities.bind(this);
   }
 
@@ -36,10 +35,9 @@ class NewTask extends React.Component {
 
   //handles submission
   onSubmit() {
-    
     const url = "/api/v1/tasks/create";
     const { name, description } = this.state;
-    console.log("create", name.length, this.state.name)
+    // console.log("create", name.length, this.state.name)
     if (name.length == 0)
       return;
     
@@ -70,6 +68,22 @@ class NewTask extends React.Component {
       .catch(error => console.log(error.message));
   }
 
+  onEdit() {
+    console.log(this.props.taskid)
+    const url = `/api/v1/tasks/${this.props.taskid}`
+    Axios.put( url, {
+      name: this.state.name,
+      description: this.state.description
+    } )
+    .then(response => {
+      console.log(response.data)
+      
+      this.props.refresh()
+    })
+    .catch(error => console.log(error))
+  }
+
+
   componentDidUpdate(prevProps) {
     if (this.props.editing !== prevProps.editing) {
       console.log("changed")
@@ -81,7 +95,7 @@ class NewTask extends React.Component {
             console.log(response.data)
             this.setState({
               name: response.data.name,
-              
+              description: response.data.description
             })            
           })
         }
@@ -128,8 +142,8 @@ class NewTask extends React.Component {
                   This field is optional.
                 </small>
               </div>
-              <button type="button" onClick={this.onSubmit} className="btn custom-button">
-                Create Task
+              <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
+                {this.props.editing? "Save" : "Create" }
               </button>
               {/* <Link to="/tasks" className="btn btn-link mt-3">
                 Back to tasks
@@ -143,4 +157,4 @@ class NewTask extends React.Component {
 
 }
 
-export default NewTask;
+export default TaskEditor;
