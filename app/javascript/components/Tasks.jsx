@@ -15,7 +15,7 @@ class Tasks extends React.Component {
       editing: false,
       taskid: null
     };
-
+    this.disableEdit = this.disableEdit.bind(this)
     this.getTasks = this.getTasks.bind(this)
   }
 
@@ -123,20 +123,19 @@ class Tasks extends React.Component {
     return (
       <>
         <div className="homepage" style={{height: '100vh'}}> 
-          <div className="side-taskbar">
+          <div className="side-taskbar" style={{backgroundColor: this.state.editing? '#C5F9A2' : '#98c4ff'}}>
             <TaskEditor 
               taskid={this.state.taskid}
               editing={this.state.editing}
-              refresh={this.getTasks}></TaskEditor>
+              refresh={this.getTasks}
+              disableEdit={this.disableEdit}>
+              </TaskEditor>
           </div>
           <div className="task-display" style={{height: '100vh', flex: '0.8'}}>
           <main className="container">
             <div className="row">
               {tasks.length > 0 ? allTasks : noTask}
             </div>
-            <Link to="/" className="btn btn-link">
-              Home
-            </Link>
           </main>
           </div>
         </div>

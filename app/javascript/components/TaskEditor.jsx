@@ -67,6 +67,7 @@ class TaskEditor extends React.Component {
       .then((response) => {
         console.log(response);
         this.props.refresh();
+        this.setBlankInput();
       })
       .catch(error => console.log(error.message));
   }
@@ -144,8 +145,13 @@ class TaskEditor extends React.Component {
                 </small>
               </div>
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
-                {this.props.editing? "Save" : "Create" }
+                {this.props.editing ? "Save" : "Create" }
               </button>
+              {this.props.editing ? 
+                <button type="button" onClick={this.props.disableEdit} className="btn custom-button">
+                  Cancel
+                </button>
+               : null}
             </form>
           </div>
         </div>

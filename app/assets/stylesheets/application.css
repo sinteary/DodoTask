@@ -86,9 +86,7 @@
 .side-taskbar {
   min-width: 300px;
   min-height: 100%;
-  size: fixed;
-  background-color: #98c4ff;
-  
+  size: fixed;  
 }
 
 .homepage {
