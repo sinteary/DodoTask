@@ -129,7 +129,7 @@ class Tasks extends React.Component {
               editing={this.state.editing}
               refresh={this.getTasks}></TaskEditor>
           </div>
-          <div>
+          <div className="task-display" style={{height: '100vh', flex: '0.8'}}>
           <main className="container">
             <div className="row">
               {tasks.length > 0 ? allTasks : noTask}

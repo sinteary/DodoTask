@@ -109,7 +109,7 @@ class TaskEditor extends React.Component {
     return (
       <div className="container mt-5">  
         <div className="row">
-          <div className="col-sm-12 col-lg-6 offset-lg-3">
+          <div className="task-editor" style={{flex: 0.8, margin: '0 auto' }}>
             <h2 className="font-weight-normal mb-5">
               {this.props.editing ? "Editing task:" : "Add new task:"}
             </h2>
