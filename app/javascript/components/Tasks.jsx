@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import Axios from "axios";
-import NewTask from "./NewTask";
+import TaskEditor from "./TaskEditor";
 import ButtonIcon from "./Buttons/ButtonIcon";
 
 class Tasks extends React.Component {
@@ -62,9 +62,22 @@ class Tasks extends React.Component {
   }
 
   editTask= (id) => {
+    //if current task being edited is different than prev
+    if (id != this.state.taskid) {
+      this.setState( {
+        editing: true,
+        taskid: id
+      })
+    }
+    else {
+      this.disableEdit()
+    }
+  }
+
+  disableEdit() {
     this.setState({
-      editing: this.state.taskid === id? !this.state.editing : true,
-      taskid: id
+      taskid: null,
+      editing: false
     })
   }
 
@@ -79,7 +92,7 @@ class Tasks extends React.Component {
     const allTasks = tasks.map( task => (
       <div key={task.id} className="col-md-6 cos-lg-4">
         <div className="card mb-4">
-          <div className="car4d-body">
+          <div className="card-body">
             <div>
               <div className="task-checkbox">
                 <input type="checkbox" className="done-checkbox"
@@ -88,9 +101,10 @@ class Tasks extends React.Component {
                 <label className= "task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              {/* <Button fluid floated="right" icon="alternate trash" onClick={() => this.deleteTask(task.id)}/> */}
-              <ButtonIcon icontype="alternate pencil" onClick={() => this.editTask(task.id)}/>
-              <ButtonIcon icontype="alternate trash" btncolor={"red"} onClick={ () => this.deleteTask(task.id)}/>
+              <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)}/>
+              <Button floated="right" icon="alternate pencil" color={
+                this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"} 
+                onClick={() => this.editTask(task.id)}/>
             </div>
           </div>
         </div>
@@ -108,12 +122,12 @@ class Tasks extends React.Component {
 
     return (
       <>
-        <div className="homepage"> 
+        <div className="homepage" style={{height: '100vh'}}> 
           <div className="side-taskbar">
-            <NewTask 
+            <TaskEditor 
               taskid={this.state.taskid}
               editing={this.state.editing}
-              refresh={this.getTasks}></NewTask>
+              refresh={this.getTasks}></TaskEditor>
           </div>
           <div>
           <main className="container">

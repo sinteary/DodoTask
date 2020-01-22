@@ -24,10 +24,13 @@ class TaskEditor extends React.Component {
       .replace(/>/g, "&gt;");
   }
 
-  /*handles editing
-  use ES6 computed property names to set value of every user input to
-  corresponding key in state
-  */
+  setBlankInput() {
+    this.setState({
+      name: "",
+      description: ""
+    })
+  }
+
   onChange(event) {
     console.log(event.target.name, event.target.value);
     this.setState({ [event.target.name]: event.target.value });
@@ -63,32 +66,32 @@ class TaskEditor extends React.Component {
     })
       .then((response) => {
         console.log(response);
-        this.props.refresh()
+        this.props.refresh();
       })
       .catch(error => console.log(error.message));
   }
 
   onEdit() {
-    console.log(this.props.taskid)
+    console.log(this.props.taskid);
     const url = `/api/v1/tasks/${this.props.taskid}`
     Axios.put( url, {
       name: this.state.name,
       description: this.state.description
     } )
     .then(response => {
-      console.log(response.data)
-      
-      this.props.refresh()
+      console.log(response.data);
+      this.props.refresh();
+      this.setBlankInput();
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
   }
 
-
   componentDidUpdate(prevProps) {
-    if (this.props.editing !== prevProps.editing) {
-      console.log("changed")
-      if(this.props.editing) {
-        console.log(this.props.taskid);
+    if (this.props.taskid !== prevProps.taskid) {
+      console.log(this.props.taskid);
+      if (this.props.editing == false) {
+        this.setBlankInput()
+      } else {
         const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
           .then( response => {
@@ -98,13 +101,13 @@ class TaskEditor extends React.Component {
               description: response.data.description
             })            
           })
-        }
       }
+    }
   }
 
   render() {
     return (
-      <div className="container mt-5">
+      <div className="container mt-5">  
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
             <h2 className="font-weight-normal mb-5">
@@ -123,7 +126,6 @@ class TaskEditor extends React.Component {
                   onChange={(data) => {
                     this.onChange(data);
                   }}
-                  
                 />
               </div>
               <div className="form-group">
@@ -136,7 +138,6 @@ class TaskEditor extends React.Component {
                   className="form-control"
                   onChange={this.onChange}
                   value={this.state.description}
-                  
                 />
                 <small id="descriptionHelp" className="form-text text-muted">
                   This field is optional.
@@ -145,9 +146,6 @@ class TaskEditor extends React.Component {
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
                 {this.props.editing? "Save" : "Create" }
               </button>
-              {/* <Link to="/tasks" className="btn btn-link mt-3">
-                Back to tasks
-              </Link> */}
             </form>
           </div>
         </div>

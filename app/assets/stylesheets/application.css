@@ -84,10 +84,11 @@
 }
 
 .side-taskbar {
-  background-color: #a6c7f3;
-  width: 40%
-
-
+  min-width: 300px;
+  min-height: 100%;
+  size: fixed;
+  background-color: #98c4ff;
+  
 }
 
 .homepage {
@@ -103,4 +104,8 @@
   border-radius: 5px;
   padding-bottom: 5px;
 
+}
+
+.form-group {
+  size: fixed;
 }
