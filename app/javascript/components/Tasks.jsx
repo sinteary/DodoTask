@@ -25,24 +25,27 @@ class Tasks extends React.Component {
     Axios.get(url)
       .then(response => {
         console.log(response.data);
-        this.setState({ tasks: response.data, editing: false });
+        this.setState({
+          tasks: response.data,
+          editing: false
+        });
       })
-        //if error: redirect to homepage
-        .catch(error => {
-          console.log(error);
-          this.props.history.push("/tasks");
+      //if error: redirect to homepage
+      .catch(error => {
+        console.log(error);
+        this.props.history.push("/tasks");
       });
   }
 
   markTaskDone = (e, id) => {
     console.log("checked done for task ${id}")
     const url = `/api/v1/tasks/${id}`
-    Axios.put( url, {done: e.target.checked} )
-    .then(response => {
-      console.log(response.data)
-      this.getTasks()
-    })
-    .catch(error => console.log(error))
+    Axios.put(url, { done: e.target.checked })
+      .then(response => {
+        console.log(response.data)
+        this.getTasks()
+      })
+      .catch(error => console.log(error))
   }
 
   deleteTask = (id) => {
@@ -55,16 +58,16 @@ class Tasks extends React.Component {
           "X-CSRF-Token": token,
           "Content-Type": "application/json"
         }
-      }*/)    
-        .then(this.getTasks)
-        //.then(() => this.props.history.push("/tasks"))
-        .catch(error => console.log(error.message));
+      }*/)
+      .then(this.getTasks)
+      //.then(() => this.props.history.push("/tasks"))
+      .catch(error => console.log(error.message));
   }
 
-  editTask= (id) => {
+  editTask = (id) => {
     //if current task being edited is different than prev
     if (id != this.state.taskid) {
-      this.setState( {
+      this.setState({
         editing: true,
         taskid: id
       })
@@ -89,7 +92,7 @@ class Tasks extends React.Component {
 
   render() {
     const { tasks } = this.state;
-    const allTasks = tasks.map( task => (
+    const allTasks = tasks.map(task => (
       <div key={task.id} className="col-md-6 cos-lg-4">
         <div className="card mb-4">
           <div className="card-body">
@@ -97,14 +100,14 @@ class Tasks extends React.Component {
               <div className="task-checkbox">
                 <input type="checkbox" className="done-checkbox"
                   onChange={(e) => this.markTaskDone(e, task.id)}
-                  checked={task.done}/>
-                <label className= "task-label">{task.name}</label>
+                  checked={task.done} />
+                <label className="task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)}/>
+              <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
               <Button floated="right" icon="alternate pencil" color={
-                this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"} 
-                onClick={() => this.editTask(task.id)}/>
+                this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"}
+                onClick={() => this.editTask(task.id)} />
             </div>
           </div>
         </div>
@@ -122,21 +125,21 @@ class Tasks extends React.Component {
 
     return (
       <>
-        <div className="homepage" style={{height: '100vh'}}> 
-          <div className="side-taskbar" style={{backgroundColor: this.state.editing? '#C5F9A2' : '#98c4ff'}}>
-            <TaskEditor 
+        <div className="homepage" style={{ height: '100vh' }}>
+          <div className="side-taskbar" style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }}>
+            <TaskEditor
               taskid={this.state.taskid}
               editing={this.state.editing}
               refresh={this.getTasks}
               disableEdit={this.disableEdit}>
-              </TaskEditor>
+            </TaskEditor>
           </div>
-          <div className="task-display" style={{height: '100vh', flex: '0.8'}}>
-          <main className="container">
-            <div className="row">
-              {tasks.length > 0 ? allTasks : noTask}
-            </div>
-          </main>
+          <div className="task-display" style={{ height: '100vh', flex: '0.8' }}>
+            <main className="container">
+              <div className="row">
+                {tasks.length > 0 ? allTasks : noTask}
+              </div>
+            </main>
           </div>
         </div>
       </>

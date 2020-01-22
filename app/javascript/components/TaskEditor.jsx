@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import TagsBar from "./TagsBar"
 
 class TaskEditor extends React.Component {
   constructor(props) {
@@ -40,10 +41,9 @@ class TaskEditor extends React.Component {
   onSubmit() {
     const url = "/api/v1/tasks/create";
     const { name, description } = this.state;
-    // console.log("create", name.length, this.state.name)
     if (name.length == 0)
       return;
-    
+
     //builds an object containing parameters required by task controller to create new task
     const body = {
       name,
@@ -52,7 +52,7 @@ class TaskEditor extends React.Component {
       done: false
     };
 
-    const token= document.querySelector('meta[name="csrf-token"]').content;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(url, {
       method: "POST",
       headers: {
@@ -75,16 +75,16 @@ class TaskEditor extends React.Component {
   onEdit() {
     console.log(this.props.taskid);
     const url = `/api/v1/tasks/${this.props.taskid}`
-    Axios.put( url, {
+    Axios.put(url, {
       name: this.state.name,
       description: this.state.description
-    } )
-    .then(response => {
-      console.log(response.data);
-      this.props.refresh();
-      this.setBlankInput();
     })
-    .catch(error => console.log(error));
+      .then(response => {
+        console.log(response.data);
+        this.props.refresh();
+        this.setBlankInput();
+      })
+      .catch(error => console.log(error));
   }
 
   componentDidUpdate(prevProps) {
@@ -95,12 +95,12 @@ class TaskEditor extends React.Component {
       } else {
         const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
-          .then( response => {
+          .then(response => {
             console.log(response.data)
             this.setState({
               name: response.data.name,
               description: response.data.description
-            })            
+            })
           })
       }
     }
@@ -108,9 +108,9 @@ class TaskEditor extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">  
+      <div className="container mt-5">
         <div className="row">
-          <div className="task-editor" style={{flex: 0.8, margin: '0 auto' }}>
+          <div className="task-editor" style={{ flex: 0.8, margin: '0 auto' }}>
             <h2 className="font-weight-normal mb-5">
               {this.props.editing ? "Editing task:" : "Add new task:"}
             </h2>
@@ -127,6 +127,7 @@ class TaskEditor extends React.Component {
                   onChange={(data) => {
                     this.onChange(data);
                   }}
+                  style={{ background: "rgba(255,255,255,0.5)" }}
                 />
               </div>
               <div className="form-group">
@@ -139,19 +140,21 @@ class TaskEditor extends React.Component {
                   className="form-control"
                   onChange={this.onChange}
                   value={this.state.description}
+                  style={{ background: "rgba(255,255,255,0.5)" }}
                 />
                 <small id="descriptionHelp" className="form-text text-muted">
                   This field is optional.
                 </small>
+                <TagsBar></TagsBar>
               </div>
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
-                {this.props.editing ? "Save" : "Create" }
+                {this.props.editing ? "Save" : "Create"}
               </button>
-              {this.props.editing ? 
+              {this.props.editing ?
                 <button type="button" onClick={this.props.disableEdit} className="btn custom-button">
                   Cancel
                 </button>
-               : null}
+                : null}
             </form>
           </div>
         </div>
