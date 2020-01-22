@@ -31,12 +31,22 @@ class TagsBar extends React.Component {
 		}
 	}
 
+	deleteTag(index) {
+		if (!this.props.editing) {
+			let tags = this.state.current_tags;
+			tags.splice(index, 1)
+			this.setState({
+				current_tags: tags
+			})
+		}
+	}
+
 	render() {
 		const tags = this.state.current_tags;
-		const allTags = tags.map(tag => (
-			<Label key={tag} as='a'>
+		const allTags = tags.map((tag, index) => (
+			<Label key={index} as='a'>
 				{tag}
-				<Icon name="delete"></Icon>
+				<Icon name="delete" onClick={() => this.deleteTag(index)}></Icon>
 			</Label >
 		));
 		return (

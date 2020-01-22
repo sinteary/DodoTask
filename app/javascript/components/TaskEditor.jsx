@@ -145,7 +145,9 @@ class TaskEditor extends React.Component {
                 <small id="descriptionHelp" className="form-text text-muted">
                   This field is optional.
                 </small>
-                <TagsBar></TagsBar>
+                <TagsBar
+                  editing={this.props.editing}
+                ></TagsBar>
               </div>
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
                 {this.props.editing ? "Save" : "Create"}
