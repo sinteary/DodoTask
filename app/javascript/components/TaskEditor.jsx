@@ -41,29 +41,13 @@ class TaskEditor extends React.Component {
   //handles submission
   onSubmit() {
     const url = "/api/v1/tasks/create";
-    const { name, description } = this.state;
-    if (name.length == 0)
+    if (this.state.name.length == 0)
       return;
 
-    //builds an object containing parameters required by task controller to create new task
-    const body = {
-      name,
-      //replaces every new line character in instruction with a break tag to retain text format entered by user
-      description: description.replace(/\n/g, "<br> <br>"),
+    Axios.post(url, {
+      name: this.state.name,
+      description: this.state.description,
       done: false
-    };
-
-    const token = document.querySelector('meta[name="csrf-token"]').content;
-    fetch(url, {
-      method: "POST",
-      headers: {
-        //protect against Cross-Site Request Forgery attacks
-        //attaches the token to the HTML document
-        //required whenever a non-GET request is made
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
     })
       .then((response) => {
         console.log(response);
@@ -71,6 +55,15 @@ class TaskEditor extends React.Component {
         this.setBlankInput();
       })
       .catch(error => console.log(error.message));
+  }
+
+  handleTags(taskid) {
+    let numTags = this.state.tags.length;
+    if (numTags > 0) {
+      for (i = 0; i < numTags; i++) {
+
+      }
+    }
   }
 
   onEdit() {

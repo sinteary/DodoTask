@@ -51,16 +51,9 @@ class Tasks extends React.Component {
   deleteTask = (id) => {
     console.log("delete triggered")
     const url = `/api/v1/tasks/${id}`;
-    //const token = document.querySelector('meta[name="csrf-token"]').content;
 
-    Axios.delete(url /*, {
-        headers: {
-          "X-CSRF-Token": token,
-          "Content-Type": "application/json"
-        }
-      }*/)
+    Axios.delete(url)
       .then(this.getTasks)
-      //.then(() => this.props.history.push("/tasks"))
       .catch(error => console.log(error.message));
   }
 
