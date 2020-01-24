@@ -6,17 +6,10 @@ class TagsBar extends React.Component {
 		super(props);
 		this.state = {
 			input: "",
-			current_tags: []
+			tags: this.props.current_tags
 		};
 
 		this.onChange = this.onChange.bind(this);
-	}
-
-	componentDidMount() {
-		this.state = {
-			input: "",
-			current_tags: []
-		}
 	}
 
 	onChange(event) {
@@ -25,25 +18,28 @@ class TagsBar extends React.Component {
 
 	handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
-			let tag_name = this.state.input
-			this.state.current_tags.push(tag_name)
-			this.setState({ input: "" })
+			let tag_name = this.state.input;
+			if (tag_name.length == 0) {
+				return;
+			}
+			this.props.current_tags.push(tag_name);
+			this.setState({
+				input: ""
+			});
 		}
 	}
 
 	deleteTag(index) {
 		if (!this.props.editing) {
-			let tags = this.state.current_tags;
-			tags.splice(index, 1)
-			this.setState({
-				current_tags: tags
-			})
+			this.props.current_tags.splice(index, 1);
 		}
+		this.setState({
+			tags: this.props.current_tags
+		})
 	}
 
 	render() {
-		const tags = this.state.current_tags;
-		const allTags = tags.map((tag, index) => (
+		const allTags = this.state.tags.map((tag, index) => (
 			<Label key={index} as='a'>
 				{tag}
 				<Icon name="delete" onClick={() => this.deleteTag(index)}></Icon>
@@ -67,7 +63,7 @@ class TagsBar extends React.Component {
 					/>
 				</div >
 				<div className="tag-display">
-					{this.state.current_tags.length > 0 ? allTags : null}
+					{this.props.current_tags.length > 0 ? allTags : null}
 				</div>
 			</div>
 		);

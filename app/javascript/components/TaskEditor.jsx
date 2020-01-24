@@ -9,6 +9,7 @@ class TaskEditor extends React.Component {
     this.state = {
       name: "",
       description: "",
+      tags: []
     };
 
     this.onChange = this.onChange.bind(this);
@@ -146,6 +147,7 @@ class TaskEditor extends React.Component {
                   This field is optional.
                 </small>
                 <TagsBar
+                  current_tags={this.state.tags}
                   editing={this.props.editing}
                 ></TagsBar>
               </div>
