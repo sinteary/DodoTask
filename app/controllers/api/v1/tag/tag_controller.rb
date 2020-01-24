@@ -7,10 +7,10 @@ class TagController < ApplicationController
 
   def create
     tag = Tag.create!(tag_params)
-    if task
-      render json: task
+    if tag
+      render json: tag
     else
-      render json: task.errors
+      render json: tag.errors
     end
   end
 
