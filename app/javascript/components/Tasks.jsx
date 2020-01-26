@@ -97,6 +97,7 @@ class Tasks extends React.Component {
                 <label className="task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
+              <p>{task.duedate.dateFormat("YYYY-MM-DD HH:mm:ss")}</p>
               <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
               <Button floated="right" icon="alternate pencil" color={
                 this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"}

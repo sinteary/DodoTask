@@ -43,16 +43,36 @@ class TaskEditor extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  parseDate(date, time) {
+    let combinedDate;
+    if (date == null) {
+      return null;
+    } else {
+      if (time == null) {
+        return date;
+      } else {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+          time.getHours(), time.getMinutes(), time.getSeconds());
+      }
+    }
+  }
+
+
   //handles submission
   onSubmit() {
     const url = "/api/v1/tasks/create";
     if (this.state.name.length == 0)
       return;
 
+    let combinedDate = this.parseDate(this.state.date, this.state.time);
+
+    //console.log(combinedDate);
+
     Axios.post(url, {
       name: this.state.name,
       description: this.state.description,
-      done: false
+      done: false,
+      duedate: combinedDate
     })
       .then((response) => {
         console.log(response);
