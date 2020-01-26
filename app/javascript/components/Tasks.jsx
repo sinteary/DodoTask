@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import Axios from "axios";
 import TaskEditor from "./TaskEditor";
-import ButtonIcon from "./Buttons/ButtonIcon";
+import 'semantic-ui-css/semantic.css';
 
 class Tasks extends React.Component {
   constructor(props) {

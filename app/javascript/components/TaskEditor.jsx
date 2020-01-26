@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import TagsBar from "./TagsBar"
+import TagsBar from "./TagsBar";
+import DatePicker from 'react-datepicker';
+import { Form } from 'semantic-ui-react';
+import "react-datepicker/dist/react-datepicker.css";
 
 class TaskEditor extends React.Component {
   constructor(props) {
@@ -9,6 +12,7 @@ class TaskEditor extends React.Component {
     this.state = {
       name: "",
       description: "",
+      date: null,
       tags: []
     };
 
@@ -108,8 +112,8 @@ class TaskEditor extends React.Component {
             <h2 className="font-weight-normal mb-5">
               {this.props.editing ? "Editing task:" : "Add new task:"}
             </h2>
-            <form>
-              <div className="form-group">
+            <Form>
+              <Form.Field>
                 <label htmlFor="taskName">Task name</label>
                 <input
                   type="text"
@@ -123,9 +127,9 @@ class TaskEditor extends React.Component {
                   }}
                   style={{ background: "rgba(255,255,255,0.5)" }}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="taskDescription">Task description </label>
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor="taskDescription">Description </label>
                 <textarea
                   type="text"
                   name="description"
@@ -136,14 +140,28 @@ class TaskEditor extends React.Component {
                   value={this.state.description}
                   style={{ background: "rgba(255,255,255,0.5)" }}
                 />
-                <small id="descriptionHelp" className="form-text text-muted">
-                  This field is optional.
-                </small>
-                <TagsBar
-                  current_tags={this.state.tags}
-                  editing={this.props.editing}
-                ></TagsBar>
+                {/* <small id="descriptionHelp" className="form-text text-muted">
+                  
+                </small> */}
+              </Form.Field>
+              <div className="form-group">
+                <label htmlFor="datepicker"> Due date (if any) </label>
+                <DatePicker
+                  id="datepicker"
+                  selected={this.state.date}
+                  onChange={date => {
+                    this.setState({ date: date });
+                    console.log(date);
+                  }}
+                  customInput={
+                    <input value={this.state.date}></input>
+                  }
+                />
               </div>
+              <TagsBar
+                current_tags={this.state.tags}
+                editing={this.props.editing}
+              ></TagsBar>
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
                 {this.props.editing ? "Save" : "Create"}
               </button>
@@ -152,7 +170,7 @@ class TaskEditor extends React.Component {
                   Cancel
                 </button>
                 : null}
-            </form>
+            </Form>
           </div>
         </div>
       </div>
