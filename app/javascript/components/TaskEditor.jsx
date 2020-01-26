@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import TagsBar from "./TagsBar";
 import DatePicker from 'react-datepicker';
-import { Form } from 'semantic-ui-react';
+import { Form, Input } from 'semantic-ui-react';
 import "react-datepicker/dist/react-datepicker.css";
 
 class TaskEditor extends React.Component {
@@ -13,6 +13,7 @@ class TaskEditor extends React.Component {
       name: "",
       description: "",
       date: null,
+      time: null,
       tags: []
     };
 
@@ -144,24 +145,53 @@ class TaskEditor extends React.Component {
                   
                 </small> */}
               </Form.Field>
-              <div className="form-group">
-                <label htmlFor="datepicker"> Due date (if any) </label>
-                <DatePicker
-                  id="datepicker"
-                  selected={this.state.date}
-                  onChange={date => {
-                    this.setState({ date: date });
-                    console.log(date);
-                  }}
-                  customInput={
-                    <input value={this.state.date}></input>
-                  }
-                />
-              </div>
-              <TagsBar
-                current_tags={this.state.tags}
-                editing={this.props.editing}
-              ></TagsBar>
+              <Form.Group widths="equal">
+                <Form.Field>
+                  <label htmlFor="datepicker"> Due date </label>
+                  <DatePicker
+                    id="datepicker"
+                    selected={this.state.date}
+                    onChange={date => {
+                      this.setState({ date: date });
+                      console.log(date);
+                    }}
+                    customInput={
+                      <Input
+                        style={{ width: "120px", float: "left" }}
+                        value={this.state.date}
+                      />
+                    }
+                  />
+                  <label htmlFor="timepicker"> Time </label>
+                  <DatePicker
+                    id="timepicker"
+                    selected={this.state.time}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    disabled={this.state.date == null ? true : false}
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                    placeholder="Disabled"
+                    onChange={date => {
+                      this.setState({ time: date });
+                      console.log(date);
+                    }}
+                    customInput={
+                      <Input
+                        // disabled={this.state.date == null ? "disabled" : null}
+                        style={{ width: "100px", float: "left" }}
+                        value={this.state.date} />
+                    }
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Field>
+                <TagsBar
+                  current_tags={this.state.tags}
+                  editing={this.props.editing}
+                ></TagsBar>
+              </Form.Field>
               <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
                 {this.props.editing ? "Save" : "Create"}
               </button>
