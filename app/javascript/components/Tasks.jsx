@@ -98,8 +98,8 @@ class Tasks extends React.Component {
                 <label className="task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <p>{moment(task.duedate).format('DD/MM/YYYY HH:mm a')}</p>
-              {/* <p>{moment(task.duedate, 'YYYY-DD-MMThh:mm:ss').format('DD/MM/YYYY HH:mm:ss a')}</p> */}
+              <p>{task.duedate == null ? "" :
+                moment(task.duedate).format('DD/MM/YYYY HH:mm a')}</p>
               <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
               <Button floated="right" icon="alternate pencil" color={
                 this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"}
@@ -114,7 +114,7 @@ class Tasks extends React.Component {
     const noTask = (
       <div className="vw-100 vh-50 d-flex alighn-items-center justify-content-center">
         <h4>
-          No tasks yet. Why not <Link to="/new_task">create one</Link>
+          No tasks! You are a free bird. Go have some fun!
         </h4>
       </div>
     );

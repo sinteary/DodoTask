@@ -34,7 +34,10 @@ class TaskEditor extends React.Component {
   setBlankInput() {
     this.setState({
       name: "",
-      description: ""
+      description: "",
+      date: null,
+      time: null,
+      tags: []
     })
   }
 
@@ -93,7 +96,8 @@ class TaskEditor extends React.Component {
     const url = `/api/v1/tasks/${this.props.taskid}`
     Axios.put(url, {
       name: this.state.name,
-      description: this.state.description
+      description: this.state.description,
+      duedate: this.parseDate(this.state.date, this.state.time)
     })
       .then(response => {
         console.log(response.data);
@@ -115,7 +119,9 @@ class TaskEditor extends React.Component {
             console.log(response.data)
             this.setState({
               name: response.data.name,
-              description: response.data.description
+              description: response.data.descriptions,
+              date: response.data.duedate == null ? null : Date.parse(response.data.duedate),
+              time: Date.parse(response.data.duedate)
             })
           })
       }
