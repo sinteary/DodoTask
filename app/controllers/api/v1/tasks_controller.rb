@@ -12,12 +12,14 @@ class Api::V1::TasksController < ApplicationController
       task = Task.all.order(created_at: :desc)
       render json: task
     end
-    
   end
 
-  def incomplete_tasks
-    task = Task.where(:done => false).order(created_at: :des)
-    render json: task
+  def show
+    if task
+      render json: task
+    else
+      render json: task.errors
+    end
   end
 
   def create
