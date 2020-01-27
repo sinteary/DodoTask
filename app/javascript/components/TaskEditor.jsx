@@ -44,7 +44,6 @@ class TaskEditor extends React.Component {
   }
 
   parseDate(date, time) {
-    let combinedDate;
     if (date == null) {
       return null;
     } else {
@@ -65,8 +64,6 @@ class TaskEditor extends React.Component {
       return;
 
     let combinedDate = this.parseDate(this.state.date, this.state.time);
-
-    //console.log(combinedDate);
 
     Axios.post(url, {
       name: this.state.name,

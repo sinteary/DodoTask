@@ -4,6 +4,7 @@ import { Button } from "semantic-ui-react";
 import Axios from "axios";
 import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
+import moment from "moment";
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -97,7 +98,8 @@ class Tasks extends React.Component {
                 <label className="task-label">{task.name}</label>
               </div>
               <p>{task.description}</p>
-              <p>{task.duedate.dateFormat("YYYY-MM-DD HH:mm:ss")}</p>
+              <p>{moment(task.duedate).format('DD/MM/YYYY HH:mm a')}</p>
+              {/* <p>{moment(task.duedate, 'YYYY-DD-MMThh:mm:ss').format('DD/MM/YYYY HH:mm:ss a')}</p> */}
               <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
               <Button floated="right" icon="alternate pencil" color={
                 this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"}
