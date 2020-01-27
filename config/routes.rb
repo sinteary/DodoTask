@@ -4,10 +4,11 @@ Rails.application.routes.draw do
       # modify HTTP verb of create and destroy routes to post/delete data
       # modify routes of show and destroy by adding id parameter - id holds identification no.
       get 'tasks/index'
+      get 'incomplete_tasks', to: 'tasks#incomplete_tasks'
       post 'tasks/create'
-      get '/show/:id', to: 'tasks#show'
-      delete 'tasks/:id', to: 'tasks#destroy'
       put 'tasks/:id', to: 'tasks#edit'
+      delete 'tasks/:id', to: 'tasks#destroy'
+      
     end
   end
   root 'homepage#index'

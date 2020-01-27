@@ -20,7 +20,8 @@ class TaskList extends React.Component {
     const url = "/api/v1/tasks/index";
     Axios.get(url, {
       params: {
-        done: this.props.condition
+        status: this.props.tasktype,
+        sorting: this.props.sortcriteria
       }
     })
       .then(response => {
@@ -33,7 +34,7 @@ class TaskList extends React.Component {
       })
       .catch(error => {
         console.log(error);
-        this.props.history.push("/tasks");
+        // this.props.history.push("/tasks");
       });
   }
 
@@ -109,7 +110,6 @@ class TaskList extends React.Component {
           </div>
         </Card.Content>
       </Card>
-
     );
   }
 
