@@ -1,62 +1,61 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import { Button, Menu } from "semantic-ui-react";
 import Axios from "axios";
 import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import moment from "moment";
+import TopBar from "./TopBar";
+import TaskList from "./TaskList"
+import AllTaskLists from "./AllTaskLists";
 
-class Tasks extends React.Component {
+class TaskPage extends React.Component {
   constructor(props) {
-    //initialising a state object that holds state of tasks
-    //on initialisation: empty array
     super(props);
     this.state = {
       tasks: [],
       editing: false,
       taskid: null
     };
-    this.disableEdit = this.disableEdit.bind(this)
-    this.getTasks = this.getTasks.bind(this)
+    // this.disableEdit = this.disableEdit.bind(this)
+    // this.getTasks = this.getTasks.bind(this)
   }
 
-  getTasks() {
-    const url = "/api/v1/tasks/index";
-    //make a HTTP call to fetch all tasks using the Fetch API
-    Axios.get(url)
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          tasks: response.data,
-          editing: false
-        });
-      })
-      //if error: redirect to homepage
-      .catch(error => {
-        console.log(error);
-        this.props.history.push("/tasks");
-      });
-  }
+  // getTasks() {
+  //   const url = "/api/v1/tasks/index";
+  //   Axios.get(url)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       this.setState({
+  //         tasks: response.data,
+  //         editing: false
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //       this.props.history.push("/tasks");
+  //     });
+  // }
 
-  markTaskDone = (e, id) => {
-    console.log("checked done for task ${id}")
-    const url = `/api/v1/tasks/${id}`
-    Axios.put(url, { done: e.target.checked })
-      .then(response => {
-        console.log(response.data)
-        this.getTasks()
-      })
-      .catch(error => console.log(error))
-  }
+  // markTaskDone = (e, id) => {
+  //   console.log("checked done for task ${id}")
+  //   const url = `/api/v1/tasks/${id}`
+  //   Axios.put(url, { done: e.target.checked })
+  //     .then(response => {
+  //       console.log(response.data)
+  //       this.getTasks()
+  //     })
+  //     .catch(error => console.log(error))
+  // }
 
-  deleteTask = (id) => {
-    console.log("delete triggered")
-    const url = `/api/v1/tasks/${id}`;
+  // deleteTask = (id) => {
+  //   console.log("delete triggered")
+  //   const url = `/api/v1/tasks/${id}`;
 
-    Axios.delete(url)
-      .then(this.getTasks)
-      .catch(error => console.log(error.message));
-  }
+  //   Axios.delete(url)
+  //     .then(this.getTasks)
+  //     .catch(error => console.log(error.message));
+  // }
 
   editTask = (id) => {
     //if current task being edited is different than prev
@@ -78,11 +77,10 @@ class Tasks extends React.Component {
     })
   }
 
-
   //React lifecycle method: called immediately after component is mounted
-  componentDidMount() {
-    this.getTasks();
-  }
+  // componentDidMount() {
+  //   this.getTasks();
+  // }
 
   render() {
     const { tasks } = this.state;
@@ -131,10 +129,23 @@ class Tasks extends React.Component {
             </TaskEditor>
           </div>
           <div className="task-display" style={{ height: '100vh', flex: '0.8' }}>
+            <div className="top-menu-bar">
+              <TopBar></TopBar>
+            </div>
+
             <main className="container">
-              <div className="row">
+              <AllTaskLists
+                taskid={this.state.taskid}
+                editing={this.state.editing}
+                editTask={this.editTask}
+                disableEdit={this.disableEdit}
+              >
+
+              </AllTaskLists>
+
+              {/* <div className="row">
                 {tasks.length > 0 ? allTasks : noTask}
-              </div>
+              </div> */}
             </main>
           </div>
         </div>
@@ -145,4 +156,4 @@ class Tasks extends React.Component {
 
 }
 
-export default Tasks;
+export default TaskPage;
