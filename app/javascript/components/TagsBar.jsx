@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, Label } from 'semantic-ui-react';
+import Axios from "axios";
 
 class TagsBar extends React.Component {
 	constructor(props) {
@@ -22,6 +23,14 @@ class TagsBar extends React.Component {
 			if (tag_name.length == 0) {
 				return;
 			}
+			const url = "/tags"
+			Axios.post(url, {
+				name: tag_name
+			})
+				.then((response) => {
+					console.log(response);
+				})
+				.catch(error => console.log(error.message));
 			this.props.current_tags.push(tag_name);
 			this.setState({
 				input: ""
