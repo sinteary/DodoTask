@@ -65,12 +65,13 @@ class TaskEditor extends React.Component {
       return;
 
     let combinedDate = this.parseDate(this.state.date, this.state.time);
-
+    console.log(this.state.tags)
     Axios.post(url, {
       name: this.state.name,
       description: this.state.description,
       done: false,
-      duedate: combinedDate
+      duedate: combinedDate,
+      tags: this.state.tags
     })
       .then((response) => {
         console.log(response);

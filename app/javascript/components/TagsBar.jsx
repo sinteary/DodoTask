@@ -23,6 +23,7 @@ class TagsBar extends React.Component {
 			if (tag_name.length == 0) {
 				return;
 			}
+			this.props.current_tags.push(tag_name);
 			this.setState({
 				input: ""
 			});

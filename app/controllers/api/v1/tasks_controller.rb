@@ -24,6 +24,7 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     task = Task.create!(task_params)
+    task.create_tags(params[:tags])
     if task
       render json: task
     else
@@ -45,7 +46,7 @@ class Api::V1::TasksController < ApplicationController
 
   private
   def task_params
-    params.permit(:name, :description, :done, :duedate)
+    params.permit(:name, :description, :done, :duedate, :tags)
   end
 
   def task
