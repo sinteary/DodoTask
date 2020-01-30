@@ -23,7 +23,9 @@ class TagsController < ApplicationController
   end 
   
   def destroy
-
+    tag = Tag.find(params[:id])
+    tag.destroy
+    head :no_content, status: :ok
   end
 
   private

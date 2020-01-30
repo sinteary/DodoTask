@@ -117,7 +117,8 @@ class TaskEditor extends React.Component {
               name: data.name,
               description: data.description,
               date: data.duedate == null ? null : new Date(data.duedate),
-              time: data.duedate == null ? null : new Date(data.duedate)
+              time: data.duedate == null ? null : new Date(data.duedate),
+              tags: data.tags
             })
           })
       }

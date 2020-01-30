@@ -7,7 +7,6 @@ class TagsBar extends React.Component {
 		super(props);
 		this.state = {
 			input: "",
-			tags: this.props.current_tags
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -34,15 +33,15 @@ class TagsBar extends React.Component {
 		if (!this.props.editing) {
 			this.props.current_tags.splice(index, 1);
 		}
-		this.setState({
-			tags: this.props.current_tags
-		})
+		// this.setState({
+		// 	tags: this.props.current_tags
+		// })
 	}
 
 	render() {
-		const allTags = this.state.tags.map((tag, index) => (
+		const allTags = this.props.current_tags.map((tag, index) => (
 			<Label key={index} as='a'>
-				{tag}
+				{tag.name}
 				<Icon name="delete" onClick={() => this.deleteTag(index)}></Icon>
 			</Label >
 		));
