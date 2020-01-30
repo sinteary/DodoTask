@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Axios from "axios";
 import TagsBar from "./TagsBar";
 import DatePicker from 'react-datepicker';
@@ -59,7 +58,6 @@ class TaskEditor extends React.Component {
     }
   }
 
-
   //handles submission
   onSubmit() {
     const url = "/api/v1/tasks/create";
@@ -76,33 +74,29 @@ class TaskEditor extends React.Component {
     })
       .then((response) => {
         console.log(response);
-        this.props.refresh();
+        this.props.toggleRefresh();
         this.setBlankInput();
       })
       .catch(error => console.log(error.message));
   }
 
-  handleTags(taskid) {
-    let numTags = this.state.tags.length;
-    if (numTags > 0) {
-      for (i = 0; i < numTags; i++) {
-
-      }
-    }
-  }
-
   onEdit() {
     console.log(this.props.taskid);
     const url = `/api/v1/tasks/${this.props.taskid}`
+
+    console.log(this.state.date)
+    console.log(this.state.time)
+    let combinedDate = this.parseDate(this.state.date, this.state.time);
     Axios.put(url, {
       name: this.state.name,
       description: this.state.description,
-      duedate: this.parseDate(this.state.date, this.state.time)
+      duedate: combinedDate
     })
       .then(response => {
         console.log(response.data);
-        this.props.refresh();
+        this.props.toggleRefresh();
         this.setBlankInput();
+        this.props.disableEdit();
       })
       .catch(error => console.log(error));
   }
@@ -116,12 +110,13 @@ class TaskEditor extends React.Component {
         const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
           .then(response => {
-            console.log(response.data)
+            console.log("PULL TASK INFO:", response.data)
+            let data = response.data;
             this.setState({
-              name: response.data.name,
-              description: response.data.descriptions,
-              date: response.data.duedate == null ? null : Date.parse(response.data.duedate),
-              time: Date.parse(response.data.duedate)
+              name: data.name,
+              description: data.description,
+              date: data.duedate == null ? null : new Date(data.duedate),
+              time: data.duedate == null ? null : new Date(data.duedate)
             })
           })
       }
@@ -202,7 +197,6 @@ class TaskEditor extends React.Component {
                     }}
                     customInput={
                       <Input
-                        // disabled={this.state.date == null ? "disabled" : null}
                         style={{ width: "100px", float: "left" }}
                         value={this.state.date} />
                     }

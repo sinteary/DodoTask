@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from "axios";
-import { Card, Icon, Image, Button } from 'semantic-ui-react';
-import moment from "moment";
+import { Card, Icon, Button } from 'semantic-ui-react';
+import { format, compareAsc } from 'date-fns'
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -68,6 +68,15 @@ class TaskList extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.shouldRefresh !== prevProps.shouldRefresh) {
+      if (this.props.shouldRefresh == true) {
+        this.getTasks();
+        this.props.toggleRefresh();
+      }
+    }
+  }
+
   render() {
     const { tasks } = this.state;
     const allTasks = tasks.map(task => (
@@ -81,7 +90,7 @@ class TaskList extends React.Component {
           </div>
           <p>{task.description}</p>
           <p>{task.duedate == null ? "" :
-            moment(task.duedate).format('DD/MM/YYYY HH:mm a')}</p>
+            format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
           <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
           <Button floated="right" icon="alternate pencil" color={
             this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}

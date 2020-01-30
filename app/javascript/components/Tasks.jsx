@@ -1,12 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button, Menu } from "semantic-ui-react";
-import Axios from "axios";
 import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
-import moment from "moment";
 import TopBar from "./TopBar";
-import TaskList from "./TaskList"
 import AllTaskLists from "./AllTaskLists";
 
 class TaskPage extends React.Component {
@@ -15,9 +10,11 @@ class TaskPage extends React.Component {
     this.state = {
       tasks: [],
       editing: false,
-      taskid: null
+      taskid: null,
+      refresh: false
     };
-    this.disableEdit = this.disableEdit.bind(this)
+    this.disableEdit = this.disableEdit.bind(this);
+    this.toggleRefresh = this.toggleRefresh.bind(this);
   }
 
   editTask = (id) => {
@@ -40,32 +37,15 @@ class TaskPage extends React.Component {
     })
   }
 
-  render() {
-    // const { tasks } = this.state;
-    // const allTasks = tasks.map(task => (
-    //   <div key={task.id} className="col-md-6 cos-lg-4">
-    //     <div className="card mb-4">
-    //       <div className="card-body">
-    //         <div>
-    //           <div className="task-checkbox">
-    //             <input type="checkbox" className="done-checkbox"
-    //               onChange={(e) => this.markTaskDone(e, task.id)}
-    //               checked={task.done} />
-    //             <label className="task-label">{task.name}</label>
-    //           </div>
-    //           <p>{task.description}</p>
-    //           <p>{task.duedate == null ? "" :
-    //             moment(task.duedate).format('DD/MM/YYYY HH:mm a')}</p>
-    //           <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
-    //           <Button floated="right" icon="alternate pencil" color={
-    //             this.state.editing && (this.state.taskid == task.id) ? "black" : "grey"}
-    //             onClick={() => this.editTask(task.id)} />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // ));
+  toggleRefresh() {
+    let current = this.state.refresh;
+    this.setState({
+      refresh: !current
+    })
+    console.log(this.state.refresh)
+  }
 
+  render() {
     return (
       <>
         <div className="homepage" style={{ height: '100vh' }}>
@@ -73,7 +53,7 @@ class TaskPage extends React.Component {
             <TaskEditor
               taskid={this.state.taskid}
               editing={this.state.editing}
-              refresh={this.getTasks}
+              toggleRefresh={this.toggleRefresh}
               disableEdit={this.disableEdit}>
             </TaskEditor>
           </div>
@@ -88,12 +68,11 @@ class TaskPage extends React.Component {
                 editing={this.state.editing}
                 editTask={this.editTask}
                 disableEdit={this.disableEdit}
+                toggleRefresh={this.toggleRefresh}
+                shouldRefresh={this.state.refresh}
               >
               </AllTaskLists>
 
-              {/* <div className="row">
-                {tasks.length > 0 ? allTasks : noTask}
-              </div> */}
             </main>
           </div>
         </div>

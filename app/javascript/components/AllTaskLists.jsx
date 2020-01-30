@@ -15,11 +15,10 @@ class AllTaskLists extends React.Component {
       <div>
         <TaskList
           tasktype="not_done"
-          taskid={this.props.taskid}
-          editTask={this.editTask}
-          disableEdit={this.props.disableEdit}
-          editing={this.props.editing}
           condition={false}
+          editTask={this.editTask}
+          toggleRefresh={this.props.toggleRefresh}
+          shouldRefresh={this.props.shouldRefresh}
         ></TaskList>
       </div>
     );
