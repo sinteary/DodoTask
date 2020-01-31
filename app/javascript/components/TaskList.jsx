@@ -39,25 +39,6 @@ class TaskList extends React.Component {
       });
   }
 
-  // markTaskDone = (e, id) => {
-  //   console.log("checked done for task")
-  //   console.log(e.target.value)
-  //   const url = `/api/v1/tasks/${id}`
-  //   Axios.put(url,
-  //     {
-  //       data:
-  //       {
-  //         done: data.value,
-  //         tags: []
-  //       }
-  //     })
-  //     .then(response => {
-  //       console.log(response.data)
-  //       this.getTasks()
-  //     })
-  //     .catch(error => console.log(error))
-  // }
-
   deleteTask = (id) => {
     console.log("delete triggered")
     const url = `/api/v1/tasks/${id}`;
@@ -91,7 +72,7 @@ class TaskList extends React.Component {
 
     function getTags(tags) {
       return tags.map((tag, index) => (
-        <Label color={"blue"} key={index} as='a'>
+        <Label color={"blue"} size={"small"} key={index} as='a'>
           {tag.name}
         </Label >
       ));
@@ -106,25 +87,16 @@ class TaskList extends React.Component {
             refresh={this.getTasks}
             task_id={task.id}
           />
-
-          {/* <div>
-            <label
-              className="task-label"
-              htmlFor="checkid">
-              <input
-                type="checkbox"
-                id="checkid"
-                className="done-checkbox"
-                onChange={(e) => this.markTaskDone(e, task.id)}
-                checked={task.done} />
-              {task.name}
-            </label>
-          </div> */}
+          <Card.Meta>
+            <p>{task.description}</p>
+          </Card.Meta>
         </Card.Content>
-        <p>{task.description}</p>
+        <Card.Content>
+          <div>{getTags(task.tags)}</div>
+        </Card.Content>
         <p>{task.duedate == null ? "" :
           format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
-        <div>{getTags(task.tags)}</div>
+
         <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
         <Button floated="right" icon="alternate pencil" color={
           this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
