@@ -1,0 +1,2 @@
+class Tasklist < ApplicationRecord
+end
