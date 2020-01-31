@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
     validates :name, presence: true
+    belongs_to :tasklist
     has_many :labels
     has_many :tags, through: :labels
 

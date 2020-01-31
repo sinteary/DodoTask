@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :tags, only: [:create, :show, :destroy, :edit], path: 'tags'
+  resources :tags, only: [ :create, :show, :destroy, :edit], path: 'tags'
+  resources :tasklists, only: [:index, :create, :show, :destroy, :edit]
   namespace :api do
     namespace :v1 do
       # modify HTTP verb of create and destroy routes to post/delete data
