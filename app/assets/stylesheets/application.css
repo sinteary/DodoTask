@@ -59,6 +59,7 @@
   border-color: grey;
   background-color: rgb(212, 208, 208);
   border-radius: 3px;
+  vertical-align: middle;
 }
 
 .done-checkbox:checked {
@@ -69,6 +70,8 @@
   border-color: rgb(27, 172, 47);
   background-color: #b1ebb1;
   border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .done-checkbox:checked:after {
@@ -76,12 +79,19 @@
   font-size: 13px;
   color: #1f1f29;
   position: absolute;
+  vertical-align: middle;
 }
 
 .task-label {
-  padding-left: 10px;
   font-size: 16px;
+  display: inline-block;
+  word-wrap: break-word;
 }
+
+/* .task-label,input{
+  display: inline-block;
+  vertical-align: middle;
+} */
 
 .side-taskbar {
   min-width: 300px;

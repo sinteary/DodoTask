@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from "axios";
-import { Card, Icon, Button, Label } from 'semantic-ui-react';
+import TaskCheckbox from "./Buttons/TaskCheckbox";
+import { Card, Icon, Button, Label, Checkbox } from 'semantic-ui-react';
 import { format, compareAsc } from 'date-fns'
 
 class TaskList extends React.Component {
@@ -38,16 +39,24 @@ class TaskList extends React.Component {
       });
   }
 
-  markTaskDone = (e, id) => {
-    console.log("checked done for task ${id}")
-    const url = `/api/v1/tasks/${id}`
-    Axios.put(url, { done: e.target.checked })
-      .then(response => {
-        console.log(response.data)
-        this.getTasks()
-      })
-      .catch(error => console.log(error))
-  }
+  // markTaskDone = (e, id) => {
+  //   console.log("checked done for task")
+  //   console.log(e.target.value)
+  //   const url = `/api/v1/tasks/${id}`
+  //   Axios.put(url,
+  //     {
+  //       data:
+  //       {
+  //         done: data.value,
+  //         tags: []
+  //       }
+  //     })
+  //     .then(response => {
+  //       console.log(response.data)
+  //       this.getTasks()
+  //     })
+  //     .catch(error => console.log(error))
+  // }
 
   deleteTask = (id) => {
     console.log("delete triggered")
@@ -82,7 +91,7 @@ class TaskList extends React.Component {
 
     function getTags(tags) {
       return tags.map((tag, index) => (
-        <Label key={index} as='a'>
+        <Label color={"blue"} key={index} as='a'>
           {tag.name}
         </Label >
       ));
@@ -90,22 +99,37 @@ class TaskList extends React.Component {
 
     const allTasks = tasks.map(task => (
       <Card key={task.id}>
-        <div>
-          <div className="task-checkbox">
-            <input type="checkbox" className="done-checkbox"
-              onChange={(e) => this.markTaskDone(e, task.id)}
-              checked={task.done} />
-            <label className="task-label">{task.name}</label>
-          </div>
-          <p>{task.description}</p>
-          <p>{task.duedate == null ? "" :
-            format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
-          <div>{getTags(task.tags)}</div>
-          <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
-          <Button floated="right" icon="alternate pencil" color={
-            this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
-            onClick={() => this.editTask(task.id)} />
-        </div>
+        <Card.Content>
+          <TaskCheckbox
+            label={task.name}
+            task_status={task.done}
+            refresh={this.getTasks}
+            task_id={task.id}
+          />
+
+          {/* <div>
+            <label
+              className="task-label"
+              htmlFor="checkid">
+              <input
+                type="checkbox"
+                id="checkid"
+                className="done-checkbox"
+                onChange={(e) => this.markTaskDone(e, task.id)}
+                checked={task.done} />
+              {task.name}
+            </label>
+          </div> */}
+        </Card.Content>
+        <p>{task.description}</p>
+        <p>{task.duedate == null ? "" :
+          format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
+        <div>{getTags(task.tags)}</div>
+        <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
+        <Button floated="right" icon="alternate pencil" color={
+          this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
+          onClick={() => this.editTask(task.id)} />
+
       </Card>
     ));
 

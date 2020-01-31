@@ -37,7 +37,7 @@ class TagsBar extends React.Component {
 
 	render() {
 		const allTags = this.props.current_tags.map((tag, index) => (
-			<Label key={index} as='a'>
+			<Label color={"teal"} key={index} as='a'>
 				{tag}
 				<Icon name="delete" onClick={() => this.deleteTag(index)}></Icon>
 			</Label >

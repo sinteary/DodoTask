@@ -14,7 +14,7 @@ class AllTaskLists extends React.Component {
     return (
       <div>
         <TaskList
-          tasktype="not_done"
+          tasktype=""
           condition={false}
           editTask={this.editTask}
           toggleRefresh={this.props.toggleRefresh}

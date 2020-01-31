@@ -8,7 +8,7 @@ class Api::V1::TasksController < ApplicationController
     elsif params[:status] == "not_done"
       task = Task.where(:done => false)
       render json: task
-    elsif params[:status] == "done" 
+    else
       task = Task.all.order(created_at: :desc)
       render json: task
     end
@@ -35,7 +35,9 @@ class Api::V1::TasksController < ApplicationController
   def edit
     task = Task.find(params[:id])
     task.update_attributes(task_params)
-    task.update_tags(params[:tags])
+    # if (params[:tags].any? == true)
+    #   task.update_tags(params[:tags])
+    # end
     render json: task
   end
 
