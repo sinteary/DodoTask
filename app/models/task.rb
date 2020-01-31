@@ -16,4 +16,20 @@ class Task < ApplicationRecord
         self.tags << new_tag
       end
     end
+
+    def update_tags(tagslist)
+      self.tags.each do |tag|
+        if !tagslist.include?tag.name
+          self.tags.delete(tag)
+        end
+      end
+
+      tagslist.each do |name|
+        #if tag does not exist
+        if (!self.tags.exists?(name: name))
+          new_tag = Tag.create(name: name);
+          self.tags << new_tag
+        end
+      end
+    end
 end

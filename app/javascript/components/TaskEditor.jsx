@@ -41,7 +41,7 @@ class TaskEditor extends React.Component {
   }
 
   onChange(event) {
-    console.log(event.target.name, event.target.value);
+    // console.log(event.target.name, event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   }
 
@@ -82,43 +82,42 @@ class TaskEditor extends React.Component {
   }
 
   onEdit() {
-    console.log(this.props.taskid);
+    console.log("NOW EDITING: TASK NUMBER", this.props.taskid);
     const url = `/api/v1/tasks/${this.props.taskid}`
 
-    console.log(this.state.date)
-    console.log(this.state.time)
     let combinedDate = this.parseDate(this.state.date, this.state.time);
     Axios.put(url, {
       name: this.state.name,
       description: this.state.description,
-      duedate: combinedDate
+      duedate: combinedDate,
+      tags: this.state.tags
     })
       .then(response => {
-        console.log(response.data);
+        console.log("EDIT RESPONSE DATA:", response.data);
         this.props.toggleRefresh();
         this.setBlankInput();
         this.props.disableEdit();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("EDIT ERROR:", error));
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.taskid !== prevProps.taskid) {
-      console.log(this.props.taskid);
+      console.log("NOW EDITING:", this.props.taskid);
       if (this.props.editing == false) {
         this.setBlankInput()
       } else {
         const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
           .then(response => {
-            console.log("PULL TASK INFO:", response.data)
+            console.log("PULL TASK INFO:", response.data);
             let data = response.data;
             this.setState({
               name: data.name,
               description: data.description,
               date: data.duedate == null ? null : new Date(data.duedate),
               time: data.duedate == null ? null : new Date(data.duedate),
-              tags: data.tags
+              tags: data.tags.map(item => item.name)
             })
           })
       }
@@ -173,7 +172,7 @@ class TaskEditor extends React.Component {
                     selected={this.state.date}
                     onChange={date => {
                       this.setState({ date: date });
-                      console.log(date);
+                      console.log("SET DATE:", date);
                     }}
                     customInput={
                       <Input
@@ -195,7 +194,7 @@ class TaskEditor extends React.Component {
                     placeholder="Disabled"
                     onChange={date => {
                       this.setState({ time: date });
-                      console.log(date);
+                      console.log("SET TIME:", date);
                     }}
                     customInput={
                       <Input

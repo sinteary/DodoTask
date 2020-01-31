@@ -35,6 +35,7 @@ class Api::V1::TasksController < ApplicationController
   def edit
     task = Task.find(params[:id])
     task.update_attributes(task_params)
+    task.update_tags(params[:tags])
     render json: task
   end
 

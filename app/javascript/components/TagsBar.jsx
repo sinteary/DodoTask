@@ -30,18 +30,15 @@ class TagsBar extends React.Component {
 	}
 
 	deleteTag(index) {
-		if (!this.props.editing) {
-			this.props.current_tags.splice(index, 1);
-		}
-		// this.setState({
-		// 	tags: this.props.current_tags
-		// })
+		this.props.current_tags.splice(index, 1);
+		console.log(this.props.current_tags);
+		this.forceUpdate();
 	}
 
 	render() {
 		const allTags = this.props.current_tags.map((tag, index) => (
 			<Label key={index} as='a'>
-				{tag.name}
+				{tag}
 				<Icon name="delete" onClick={() => this.deleteTag(index)}></Icon>
 			</Label >
 		));
