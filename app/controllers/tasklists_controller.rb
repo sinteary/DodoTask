@@ -7,7 +7,7 @@ class TasklistsController < ApplicationController
   end
 
   def create
-    tasklist.create(tasklist_params)
+    tasklist = Tasklist.create!(tasklist_params)
     if tasklist
       render json: tasklist
     else

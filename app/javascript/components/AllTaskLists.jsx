@@ -11,15 +11,19 @@ class AllTaskLists extends React.Component {
       new_tasklist_name: ""
     }
     this.onChange = this.onChange.bind(this);
+    this.createTaskList = this.createTaskList.bind(this);
   }
 
   createTaskList() {
     const url = "/tasklists";
     Axios.post(url, {
-
+      name: this.state.new_tasklist_name
     })
       .then(response => {
         console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
       })
   }
 
@@ -52,10 +56,11 @@ class AllTaskLists extends React.Component {
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
       <Grid.Column>
-        <TaskList
+        <p>{tasklist.name}</p>
+        {/* <TaskList
           name={tasklist.name}
         >
-        </TaskList>
+        </TaskList> */}
       </Grid.Column>
     ));
 
@@ -77,12 +82,10 @@ class AllTaskLists extends React.Component {
                 />
               </Form.Field>
             </Form>
+            <p>Click anywhere outside this popup to cancel</p>
           </Modal.Content>
           <Modal.Actions>
-            <Button>
-              Cancel
-            </Button>
-            <Button color='green'>
+            <Button color='green' onClick={this.createTaskList}>
               Create
             </Button>
           </Modal.Actions>
