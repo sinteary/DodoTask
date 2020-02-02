@@ -35,7 +35,6 @@ class TaskList extends React.Component {
       })
       .catch(error => {
         console.log(error);
-        // this.props.history.push("/tasks");
       });
   }
 
@@ -117,11 +116,12 @@ class TaskList extends React.Component {
     return (
       <Card>
         <Card.Content>
-          <Card.Header>Tasks</Card.Header>
+          <Card.Header>{this.props.name}</Card.Header>
+          <Button icon="plus" onClick={this.props.addTask}></Button>
         </Card.Content>
         <Card.Content>
           <div className="row">
-            {this.state.tasks.length > 0 ? allTasks : noTask}
+            {/* {this.state.tasks.length > 0 ? allTasks : noTask} */}
           </div>
         </Card.Content>
       </Card>

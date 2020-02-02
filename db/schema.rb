@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_123230) do
+ActiveRecord::Schema.define(version: 2020_02_02_041414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 2020_01_31_123230) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "done"
     t.datetime "duedate"
+    t.bigint "tasklist_id"
+    t.index ["tasklist_id"], name: "index_tasks_on_tasklist_id"
   end
 
+  add_foreign_key "tasks", "tasklists"
 end

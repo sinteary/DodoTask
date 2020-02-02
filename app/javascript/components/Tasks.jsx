@@ -3,6 +3,7 @@ import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import AllTaskLists from "./AllTaskLists";
+import { Segment, Sidebar } from 'semantic-ui-react'
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -10,11 +11,14 @@ class TaskPage extends React.Component {
     this.state = {
       tasks: [],
       editing: false,
+      adding: false,
       taskid: null,
+      tasklistid: null,
       refresh: false
     };
     this.disableEdit = this.disableEdit.bind(this);
     this.toggleRefresh = this.toggleRefresh.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
 
   editTask = (id) => {
@@ -45,6 +49,15 @@ class TaskPage extends React.Component {
     console.log(this.state.refresh)
   }
 
+  addTask(tasklist_id) {
+    console.log("ADD TASK PRESSED");
+    console.log("FOR TASKLIST" + tasklist_id);
+    this.setState({
+      tasklistid: tasklist_id,
+      adding: true
+    })
+  }
+
   render() {
     return (
       <>
@@ -70,6 +83,7 @@ class TaskPage extends React.Component {
                 disableEdit={this.disableEdit}
                 toggleRefresh={this.toggleRefresh}
                 shouldRefresh={this.state.refresh}
+                addTask={this.addTask}
               >
               </AllTaskLists>
 

@@ -55,12 +55,14 @@ class AllTaskLists extends React.Component {
 
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
-      <Grid.Column>
-        <p>{tasklist.name}</p>
-        {/* <TaskList
+      <Grid.Column key={tasklist.id} width={6}>
+        {/* <p>{tasklist.name}</p> */}
+        <TaskList
           name={tasklist.name}
+          addTask={() => this.props.addTask(tasklist.id)}
+        // tasks={tasklist.tasks}
         >
-        </TaskList> */}
+        </TaskList>
       </Grid.Column>
     ));
 
