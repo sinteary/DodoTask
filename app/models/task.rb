@@ -10,6 +10,11 @@ class Task < ApplicationRecord
                 :tags => {:only => [:name]}
               })
     end
+
+    # def add_to_list(tasklistid)
+    #   tasklist = Tasklist.find(tasklistid);
+    #   # tasklist.tasks <<
+    # end
     
     def create_tags(tagslist)
       tagslist.each do |name|

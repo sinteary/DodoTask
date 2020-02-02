@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import TagsBar from "./TagsBar";
 import DatePicker from 'react-datepicker';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, Container } from 'semantic-ui-react';
 import "react-datepicker/dist/react-datepicker.css";
 
 class TaskEditor extends React.Component {
@@ -59,10 +59,10 @@ class TaskEditor extends React.Component {
 
   //handles submission
   onSubmit() {
+    console.log("ADD TASK TO:" + this.props.tasklistid);
     const url = "/api/v1/tasks/create";
     if (this.state.name.length == 0)
       return;
-
     let combinedDate = this.parseDate(this.state.date, this.state.time);
     console.log(this.state.tags)
     Axios.post(url, {
@@ -70,7 +70,8 @@ class TaskEditor extends React.Component {
       description: this.state.description,
       done: false,
       duedate: combinedDate,
-      tags: this.state.tags
+      tags: this.state.tags,
+      tasklist_id: this.props.tasklistid
     })
       .then((response) => {
         console.log(response);
@@ -125,102 +126,100 @@ class TaskEditor extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">
-        <div className="row">
-          <div className="task-editor" style={{ flex: 0.8, margin: '0 auto' }}>
-            <h2 className="font-weight-normal mb-5">
-              {this.props.editing ? "Editing task:" : "Add new task:"}
-            </h2>
-            <Form>
-              <Form.Field>
-                <label htmlFor="taskName">Task name</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="taskName"
-                  className="form-control"
-                  required
-                  value={this.state.name}
-                  onChange={(data) => {
-                    this.onChange(data);
-                  }}
-                  style={{ background: "rgba(255,255,255,0.5)" }}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label htmlFor="taskDescription">Description </label>
-                <textarea
-                  type="text"
-                  name="description"
-                  rows="3"
-                  id="taskDescription"
-                  className="form-control"
-                  onChange={this.onChange}
-                  value={this.state.description}
-                  style={{ background: "rgba(255,255,255,0.5)" }}
-                />
-                {/* <small id="descriptionHelp" className="form-text text-muted">
+      <Container>
+        <div>
+          <h2>
+            {this.props.editing ? "Editing task:" : "Add new task:"}
+          </h2>
+          <Form>
+            <Form.Field>
+              <label htmlFor="taskName">Task name</label>
+              <input
+                type="text"
+                name="name"
+                id="taskName"
+                className="form-control"
+                required
+                value={this.state.name}
+                onChange={(data) => {
+                  this.onChange(data);
+                }}
+                style={{ background: "rgba(255,255,255)" }}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor="taskDescription">Description </label>
+              <textarea
+                type="text"
+                name="description"
+                rows="3"
+                id="taskDescription"
+                className="form-control"
+                onChange={this.onChange}
+                value={this.state.description}
+                style={{ background: "rgba(255,255,255)" }}
+              />
+              {/* <small id="descriptionHelp" className="form-text text-muted">
                   
                 </small> */}
-              </Form.Field>
-              <Form.Group widths="equal">
-                <Form.Field>
-                  <label htmlFor="datepicker"> Due date </label>
-                  <DatePicker
-                    id="datepicker"
-                    selected={this.state.date}
-                    onChange={date => {
-                      this.setState({ date: date });
-                      console.log("SET DATE:", date);
-                    }}
-                    customInput={
-                      <Input
-                        style={{ width: "120px", float: "left" }}
-                        value={this.state.date}
-                      />
-                    }
-                  />
-                  <label htmlFor="timepicker"> Time </label>
-                  <DatePicker
-                    id="timepicker"
-                    selected={this.state.time}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    disabled={this.state.date == null ? true : false}
-                    timeIntervals={15}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                    placeholder="Disabled"
-                    onChange={date => {
-                      this.setState({ time: date });
-                      console.log("SET TIME:", date);
-                    }}
-                    customInput={
-                      <Input
-                        style={{ width: "100px", float: "left" }}
-                        value={this.state.date} />
-                    }
-                  />
-                </Form.Field>
-              </Form.Group>
+            </Form.Field>
+            <Form.Group widths="equal">
               <Form.Field>
-                <TagsBar
-                  current_tags={this.state.tags}
-                  editing={this.props.editing}
-                ></TagsBar>
+                <label htmlFor="datepicker"> Due date </label>
+                <DatePicker
+                  id="datepicker"
+                  selected={this.state.date}
+                  onChange={date => {
+                    this.setState({ date: date });
+                    console.log("SET DATE:", date);
+                  }}
+                  customInput={
+                    <Input
+                      style={{ width: "120px", float: "left" }}
+                      value={this.state.date}
+                    />
+                  }
+                />
+                <label htmlFor="timepicker"> Time </label>
+                <DatePicker
+                  id="timepicker"
+                  selected={this.state.time}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  disabled={this.state.date == null ? true : false}
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholder="Disabled"
+                  onChange={date => {
+                    this.setState({ time: date });
+                    console.log("SET TIME:", date);
+                  }}
+                  customInput={
+                    <Input
+                      style={{ width: "100px", float: "left" }}
+                      value={this.state.date} />
+                  }
+                />
               </Form.Field>
-              <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
-                {this.props.editing ? "Save" : "Create"}
-              </button>
-              {this.props.editing ?
-                <button type="button" onClick={this.props.disableEdit} className="btn custom-button">
-                  Cancel
-                </button>
-                : null}
-            </Form>
-          </div>
+            </Form.Group>
+            <Form.Field>
+              <TagsBar
+                current_tags={this.state.tags}
+                editing={this.props.editing}
+              ></TagsBar>
+            </Form.Field>
+            <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
+              {this.props.editing ? "Save" : "Create"}
+            </button>
+            {this.props.editing ?
+              <Button onClick={this.props.disableEdit}>
+                Cancel
+                </Button>
+              : null}
+          </Form>
         </div>
-      </div>
+      </Container>
     );
   }
 

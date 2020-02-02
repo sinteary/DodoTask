@@ -60,6 +60,8 @@ class AllTaskLists extends React.Component {
         <TaskList
           name={tasklist.name}
           addTask={() => this.props.addTask(tasklist.id)}
+          tasklist_id={tasklist.id}
+          tasks={tasklist.tasks}
         // tasks={tasklist.tasks}
         >
         </TaskList>

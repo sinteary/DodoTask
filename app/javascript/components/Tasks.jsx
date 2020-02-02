@@ -3,7 +3,7 @@ import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import AllTaskLists from "./AllTaskLists";
-import { Segment, Sidebar } from 'semantic-ui-react'
+import { Container, Sidebar } from 'semantic-ui-react';
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -56,20 +56,36 @@ class TaskPage extends React.Component {
       tasklistid: tasklist_id,
       adding: true
     })
+    console.log(this.state.adding);
   }
 
   render() {
     return (
       <>
         <div className="homepage" style={{ height: '100vh' }}>
-          <div className="side-taskbar" style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }}>
-            <TaskEditor
-              taskid={this.state.taskid}
-              editing={this.state.editing}
-              toggleRefresh={this.toggleRefresh}
-              disableEdit={this.disableEdit}>
-            </TaskEditor>
-          </div>
+          <Sidebar.Pushable>
+            <Sidebar
+              animation='overlay'
+              visible={this.state.adding}
+              vertical="true"
+            >
+              <Container>
+                <TaskEditor
+                  taskid={this.state.taskid}
+                  tasklistid={this.state.tasklistid}
+                  editing={this.state.editing}
+                  toggleRefresh={this.toggleRefresh}
+                  disableEdit={this.disableEdit}>
+                </TaskEditor>
+              </Container>
+            </Sidebar>
+            <Sidebar.Pusher>
+              <div className="side-taskbar" >
+                {/* style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }} */}
+              </div>
+            </Sidebar.Pusher>
+
+          </Sidebar.Pushable>
           <div className="task-display" style={{ height: '100vh', flex: '0.8' }}>
             <div className="top-menu-bar">
               <TopBar></TopBar>

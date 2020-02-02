@@ -48,10 +48,10 @@
 .overlay {
   height: 100%;
   width: 100%;
-  opacity: 0.4;
+  opacity: 1.0;
 }
 
-.done-checkbox {
+/* .done-checkbox {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
@@ -80,6 +80,9 @@
   color: #1f1f29;
   position: absolute;
   vertical-align: middle;
+} */
+.ui.left.overlay.sidebar{
+  width: 100%
 }
 
 .task-label {
@@ -88,10 +91,6 @@
   word-wrap: break-word;
 }
 
-/* .task-label,input{
-  display: inline-block;
-  vertical-align: middle;
-} */
 
 .side-taskbar {
   min-width: 300px;

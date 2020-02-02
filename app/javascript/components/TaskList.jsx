@@ -8,35 +8,35 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: []
+      tasks: this.props.tasks
     };
-    this.getTasks = this.getTasks.bind(this)
+    // this.getTasks = this.getTasks.bind(this)
   }
 
-  componentDidMount() {
-    this.getTasks();
-  }
+  // componentDidMount() {
+  //   this.getTasks();
+  // }
 
-  getTasks() {
-    const url = "/api/v1/tasks/index";
-    Axios.get(url, {
-      params: {
-        status: this.props.tasktype,
-        sorting: this.props.sortcriteria
-      }
-    })
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          tasks: response.data,
-          editing: false
-        });
-        console.log(this.state.tasks)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  // getTasks() {
+  //   const url = `/tasklists/${this.props.tasklist_id}`;
+  //   Axios.get(url, {
+  //     // params: {
+  //     //   status: this.props.tasktype,
+  //     //   sorting: this.props.sortcriteria
+  //     // }
+  //   })
+  //     .then(response => {
+  //       console.log(response.data);
+  //       this.setState({
+  //         tasks: response.data.tasks,
+  //         editing: false
+  //       });
+  //       console.log(this.state.tasks)
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   deleteTask = (id) => {
     console.log("delete triggered")
@@ -121,7 +121,7 @@ class TaskList extends React.Component {
         </Card.Content>
         <Card.Content>
           <div className="row">
-            {/* {this.state.tasks.length > 0 ? allTasks : noTask} */}
+            {this.state.tasks.length > 0 ? allTasks : noTask}
           </div>
         </Card.Content>
       </Card>

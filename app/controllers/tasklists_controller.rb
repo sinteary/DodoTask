@@ -20,7 +20,7 @@ class TasklistsController < ApplicationController
   end
 
   def show
-    if task
+    if tasklist
       render json: tasklist
     else
       render json: tasklist.errors
