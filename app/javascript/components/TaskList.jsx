@@ -8,35 +8,30 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: this.props.tasks
+      tasks: []
     };
-    // this.getTasks = this.getTasks.bind(this)
+    this.getTasks = this.getTasks.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.getTasks();
-  // }
+  componentDidMount() {
+    this.getTasks();
+  }
 
-  // getTasks() {
-  //   const url = `/tasklists/${this.props.tasklist_id}`;
-  //   Axios.get(url, {
-  //     // params: {
-  //     //   status: this.props.tasktype,
-  //     //   sorting: this.props.sortcriteria
-  //     // }
-  //   })
-  //     .then(response => {
-  //       console.log(response.data);
-  //       this.setState({
-  //         tasks: response.data.tasks,
-  //         editing: false
-  //       });
-  //       console.log(this.state.tasks)
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
+  getTasks = () => {
+    const url = `/tasklists/${this.props.tasklist_id}`;
+    Axios.get(url)
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          tasks: response.data.tasks,
+          editing: false
+        });
+        console.log(this.state.tasks)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   deleteTask = (id) => {
     console.log("delete triggered")
@@ -60,7 +55,7 @@ class TaskList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.shouldRefresh !== prevProps.shouldRefresh) {
       if (this.props.shouldRefresh == true) {
-        this.getTasks();
+        this.getTasks;
         this.props.toggleRefresh();
       }
     }

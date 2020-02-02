@@ -46,7 +46,7 @@ class TaskPage extends React.Component {
     this.setState({
       refresh: !current
     })
-    console.log(this.state.refresh)
+    console.log("REFRESH?", this.state.refresh)
   }
 
   addTask(tasklist_id) {

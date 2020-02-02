@@ -39,7 +39,7 @@ class TasklistsController < ApplicationController
   end
 
   def tasklist
-    @tasklist ||= tasklist.find(params[:id])
+    @tasklist ||= Tasklist.find(params[:id])
   end
 
 

@@ -12,6 +12,7 @@ class AllTaskLists extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     this.createTaskList = this.createTaskList.bind(this);
+    this.getTaskLists = this.getTaskLists.bind(this)
   }
 
   createTaskList() {
@@ -56,13 +57,14 @@ class AllTaskLists extends React.Component {
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
       <Grid.Column key={tasklist.id} width={6}>
-        {/* <p>{tasklist.name}</p> */}
         <TaskList
           name={tasklist.name}
           addTask={() => this.props.addTask(tasklist.id)}
           tasklist_id={tasklist.id}
-          tasks={tasklist.tasks}
-        // tasks={tasklist.tasks}
+          // tasks={tasklist.tasks}
+          editTask={this.editTask}
+          toggleRefresh={this.props.toggleRefresh}
+          shouldRefresh={this.props.shouldRefresh}
         >
         </TaskList>
       </Grid.Column>

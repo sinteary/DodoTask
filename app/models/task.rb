@@ -10,11 +10,6 @@ class Task < ApplicationRecord
                 :tags => {:only => [:name]}
               })
     end
-
-    # def add_to_list(tasklistid)
-    #   tasklist = Tasklist.find(tasklistid);
-    #   # tasklist.tasks <<
-    # end
     
     def create_tags(tagslist)
       tagslist.each do |name|
@@ -24,6 +19,10 @@ class Task < ApplicationRecord
     end
 
     def update_tags(tagslist)
+      if tagslist===(["MARK"])
+        return
+      end
+
       self.tags.each do |tag|
         if !tagslist.include?tag.name
           self.tags.delete(tag)
@@ -33,7 +32,7 @@ class Task < ApplicationRecord
       tagslist.each do |name|
         #if tag does not exist
         if (!self.tags.exists?(name: name))
-          new_tag = Tag.create(name: name);
+          new_tag = Tag.create(name: name)
           self.tags << new_tag
         end
       end
