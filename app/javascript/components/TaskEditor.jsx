@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import TagsBar from "./TagsBar";
 import DatePicker from 'react-datepicker';
-import { Form, Input, Container } from 'semantic-ui-react';
+import { Form, Input, Container, Button } from 'semantic-ui-react';
 import "react-datepicker/dist/react-datepicker.css";
 
 class TaskEditor extends React.Component {
@@ -104,8 +104,8 @@ class TaskEditor extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.taskid !== prevProps.taskid) {
       console.log("NOW EDITING:", this.props.taskid);
-      if (this.props.editing == false) {
-        this.setBlankInput()
+      if (this.props.editing == false || this.props.adding == true) {
+        this.setBlankInput();
       } else {
         const url = `/api/v1/show/${this.props.taskid}`
         Axios.get(url)
@@ -209,9 +209,9 @@ class TaskEditor extends React.Component {
                 editing={this.props.editing}
               ></TagsBar>
             </Form.Field>
-            <button type="button" onClick={this.props.editing ? this.onEdit : this.onSubmit} className="btn custom-button">
+            <Button onClick={this.props.editing ? this.onEdit : this.onSubmit}>
               {this.props.editing ? "Save" : "Create"}
-            </button>
+            </Button>
             {this.props.editing ?
               <Button onClick={this.props.disableEdit}>
                 Cancel

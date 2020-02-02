@@ -61,7 +61,6 @@ class AllTaskLists extends React.Component {
           name={tasklist.name}
           addTask={() => this.props.addTask(tasklist.id)}
           tasklist_id={tasklist.id}
-          // tasks={tasklist.tasks}
           editTask={this.editTask}
           toggleRefresh={this.props.toggleRefresh}
           shouldRefresh={this.props.shouldRefresh}

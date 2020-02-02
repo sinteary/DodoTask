@@ -10,6 +10,7 @@ class TagsBar extends React.Component {
 		};
 
 		this.onChange = this.onChange.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
 	onChange(event) {

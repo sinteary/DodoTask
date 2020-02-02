@@ -26,6 +26,7 @@ class TaskPage extends React.Component {
     if (id != this.state.taskid) {
       this.setState({
         editing: true,
+        adding: false,
         taskid: id
       })
     }
@@ -37,7 +38,8 @@ class TaskPage extends React.Component {
   disableEdit() {
     this.setState({
       taskid: null,
-      editing: false
+      editing: false,
+      adding: false
     })
   }
 
@@ -54,9 +56,10 @@ class TaskPage extends React.Component {
     console.log("FOR TASKLIST" + tasklist_id);
     this.setState({
       tasklistid: tasklist_id,
-      adding: true
+      taskid: null,
+      adding: true,
+      editing: false
     })
-    console.log(this.state.adding);
   }
 
   render() {
@@ -66,7 +69,7 @@ class TaskPage extends React.Component {
           <Sidebar.Pushable>
             <Sidebar
               animation='overlay'
-              visible={this.state.adding}
+              visible={this.state.adding || this.state.editing}
               vertical="true"
             >
               <Container>
@@ -74,8 +77,10 @@ class TaskPage extends React.Component {
                   taskid={this.state.taskid}
                   tasklistid={this.state.tasklistid}
                   editing={this.state.editing}
+                  adding={this.state.adding}
                   toggleRefresh={this.toggleRefresh}
-                  disableEdit={this.disableEdit}>
+                  disableEdit={this.disableEdit}
+                >
                 </TaskEditor>
               </Container>
             </Sidebar>

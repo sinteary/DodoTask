@@ -16,7 +16,7 @@ class TaskCheckbox extends Component {
     // console.log("EDIT TASK: " + this.props.task_id + " from " + curr_status);
     Axios.put(url, {
       done: !curr_status,
-      tags: ["MARK"]
+      tags: ["MARK000"] //secret placeholder that is unlikely to be used as a real tag
     })
       .then(response => {
         console.log("MARK TASK " + this.props.task_id + " ", response.data);

@@ -55,7 +55,7 @@ class TaskList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.shouldRefresh !== prevProps.shouldRefresh) {
       if (this.props.shouldRefresh == true) {
-        this.getTasks;
+        this.getTasks();
         this.props.toggleRefresh();
       }
     }
@@ -92,8 +92,10 @@ class TaskList extends React.Component {
           format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
 
         <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
-        <Button floated="right" icon="alternate pencil" color={
-          this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
+        <Button
+          floated="right"
+          icon="alternate pencil"
+          color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
           onClick={() => this.editTask(task.id)} />
 
       </Card>

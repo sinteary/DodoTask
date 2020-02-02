@@ -19,7 +19,7 @@ class Task < ApplicationRecord
     end
 
     def update_tags(tagslist)
-      if tagslist===(["MARK"])
+      if tagslist===(["MARK000"])
         return
       end
 
