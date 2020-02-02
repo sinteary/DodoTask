@@ -111,7 +111,7 @@ class TaskList extends React.Component {
     );
 
     return (
-      <Card>
+      <Card className="tasklist">
         <Card.Content>
           <Card.Header>{this.props.name}</Card.Header>
           <Button icon="plus" onClick={this.props.addTask}></Button>

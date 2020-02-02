@@ -8,7 +8,8 @@ class AllTaskLists extends React.Component {
     super(props);
     this.state = {
       tasklists: [],
-      new_tasklist_name: ""
+      new_tasklist_name: "",
+      number_of_lists: 1
     }
     this.onChange = this.onChange.bind(this);
     this.createTaskList = this.createTaskList.bind(this);
@@ -34,7 +35,8 @@ class AllTaskLists extends React.Component {
       .then(response => {
         console.log("FETCH TASKLISTS", response.data);
         this.setState({
-          tasklists: response.data
+          tasklists: response.data,
+          number_of_lists: response.data.length
         })
       })
       .catch(error => {
@@ -56,17 +58,15 @@ class AllTaskLists extends React.Component {
 
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
-      <Grid.Column key={tasklist.id} width={6}>
-        <TaskList
-          name={tasklist.name}
-          addTask={() => this.props.addTask(tasklist.id)}
-          tasklist_id={tasklist.id}
-          editTask={this.editTask}
-          toggleRefresh={this.props.toggleRefresh}
-          shouldRefresh={this.props.shouldRefresh}
-        >
-        </TaskList>
-      </Grid.Column>
+      <TaskList key={tasklist.id}
+        name={tasklist.name}
+        addTask={() => this.props.addTask(tasklist.id)}
+        tasklist_id={tasklist.id}
+        editTask={this.editTask}
+        toggleRefresh={this.props.toggleRefresh}
+        shouldRefresh={this.props.shouldRefresh}
+      >
+      </TaskList>
     ));
 
     return (
@@ -95,16 +95,9 @@ class AllTaskLists extends React.Component {
             </Button>
           </Modal.Actions>
         </Modal>
-        <Grid>
+        <div className="scroll_taskdisplay">
           {allTaskLists}
-          {/* <TaskList
-            tasktype=""
-            condition={false}
-            editTask={this.editTask}
-            toggleRefresh={this.props.toggleRefresh}
-            shouldRefresh={this.props.shouldRefresh}
-          ></TaskList> */}
-        </Grid>
+        </div>
       </div >
     );
 

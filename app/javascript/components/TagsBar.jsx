@@ -47,7 +47,7 @@ class TagsBar extends React.Component {
 		return (
 			<div className="tags">
 				<div className="form-group">
-					<label htmlFor="tagsbar">Tags </label>
+					<label htmlFor="tagsbar">Tags</label>
 					<input
 						type="text"
 						name="input"

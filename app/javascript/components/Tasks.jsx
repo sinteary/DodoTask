@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import AllTaskLists from "./AllTaskLists";
 import { Container, Sidebar } from 'semantic-ui-react';
+import Axios from "axios";
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -67,13 +68,13 @@ class TaskPage extends React.Component {
     return (
       <>
         <div className="homepage" style={{ height: '100vh' }}>
-          <Sidebar.Pushable>
-            <Sidebar
-              animation='overlay'
-              visible={this.state.adding || this.state.editing}
-              vertical="true"
-            >
-              <Container>
+          <div className="side-taskbar">
+            <Sidebar.Pushable>
+              <Sidebar
+                animation='overlay'
+                visible={this.state.adding || this.state.editing}
+                vertical="true"
+              >
                 <TaskEditor
                   taskid={this.state.taskid}
                   tasklistid={this.state.tasklistid}
@@ -83,16 +84,16 @@ class TaskPage extends React.Component {
                   disableEdit={this.disableEdit}
                 >
                 </TaskEditor>
-              </Container>
-            </Sidebar>
-            <Sidebar.Pusher>
-              <div className="side-taskbar" >
-                {/* style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }} */}
-              </div>
-            </Sidebar.Pusher>
+              </Sidebar>
+              <Sidebar.Pusher>
+                <div className="side-taskbar" >
+                  {/* style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }} */}
+                </div>
+              </Sidebar.Pusher>
+            </Sidebar.Pushable>
+          </div>
 
-          </Sidebar.Pushable>
-          <div className="task-display" style={{ height: '100vh', flex: '0.8' }}>
+          <div className="task-display">
             <div className="top-menu-bar">
               <TopBar></TopBar>
             </div>
