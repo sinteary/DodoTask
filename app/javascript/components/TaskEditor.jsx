@@ -128,10 +128,13 @@ class TaskEditor extends React.Component {
     return (
       <Container>
         <div>
-          <h2>
-            {this.props.editing ? "Editing task:" : "Add new task:"}
-          </h2>
-          <Form>
+          <div>
+            <h2>
+              {this.props.editing ? "Editing task:" : "Add new task:"}
+            </h2>
+            <Button icon="close" onClick={this.props.disableEdit} />
+          </div>
+          <Form onSubmit={e => { e.preventDefault(); }}>
             <Form.Field>
               <label htmlFor="taskName">Task name</label>
               <input

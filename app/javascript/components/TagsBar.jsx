@@ -19,6 +19,7 @@ class TagsBar extends React.Component {
 
 	handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
+			event.preventDefault();
 			let tag_name = this.state.input;
 			if (tag_name.length == 0) {
 				return;
@@ -57,7 +58,6 @@ class TagsBar extends React.Component {
 							this.onChange(data);
 						}}
 						onKeyPress={this.handleKeyPress}
-						style={{ background: "rgba(255,255,255,0.5)" }}
 					/>
 				</div >
 				<div className="tag-display">

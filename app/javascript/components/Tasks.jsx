@@ -36,6 +36,7 @@ class TaskPage extends React.Component {
   }
 
   disableEdit() {
+    console.log("DISABLE EDIT ACTIVATED");
     this.setState({
       taskid: null,
       editing: false,
