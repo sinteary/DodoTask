@@ -31,7 +31,7 @@ class TaskCheckbox extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ float: "left" }}>
         <Checkbox
           label={this.props.label}
           onChange={this.toggleTaskDone}

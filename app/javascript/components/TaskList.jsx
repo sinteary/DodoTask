@@ -65,38 +65,54 @@ class TaskList extends React.Component {
     const { tasks } = this.state;
 
     function getTags(tags) {
-      return tags.map((tag, index) => (
-        <Label color={"blue"} size={"small"} key={index} as='a'>
-          {tag.name}
-        </Label >
-      ));
+      if (tags.length > 0) {
+        return (
+          <Card.Content>
+            {tags.map((tag, index) => (
+              <Label color={"blue"} size={"small"} key={index} as='a'>
+                {tag.name}
+              </Label>))}
+          </Card.Content>
+        );
+      }
+    }
+
+    function getDate(duedate) {
+      if (duedate !== null) {
+        return (
+          <Card.Content>
+            {format(new Date(duedate), ('dd/MM/yyyy hh:mm a'))}
+          </Card.Content>
+        );
+      }
     }
 
     const allTasks = tasks.map(task => (
       <Card key={task.id}>
         <Card.Content>
-          <TaskCheckbox
-            label={task.name}
-            task_status={task.done}
-            refresh={this.getTasks}
-            task_id={task.id}
-          />
-          <Card.Meta>
+          <div>
+            <TaskCheckbox
+              style={{ float: "left" }}
+              label={task.name}
+              task_status={task.done}
+              refresh={this.getTasks}
+              task_id={task.id}
+            />
+            <Icon
+              style={{ float: "right" }}
+              link name="alternate pencil"
+              color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
+              onClick={() => this.editTask(task.id)} />
+          </div>
+          <Card.Description>
             <p>{task.description}</p>
-          </Card.Meta>
+          </Card.Description>
         </Card.Content>
-        <Card.Content>
-          <div>{getTags(task.tags)}</div>
-        </Card.Content>
-        <p>{task.duedate == null ? "" :
-          format(new Date(task.duedate), ('dd/MM/yyyy hh:mm a'))}</p>
+        {getDate(task.duedate)}
+        {getTags(task.tags)}
 
-        <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} />
-        <Button
-          floated="right"
-          icon="alternate pencil"
-          color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
-          onClick={() => this.editTask(task.id)} />
+        {/* <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} /> */}
+
 
       </Card>
     ));
