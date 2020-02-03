@@ -101,6 +101,19 @@ class TaskEditor extends React.Component {
       .catch(error => console.log("EDIT ERROR:", error));
   }
 
+  deleteTask = (id) => {
+    console.log("delete triggered")
+    const url = `/api/v1/tasks/${id}`;
+
+    Axios.delete(url)
+      .then(response => {
+        console.log("DELETE TASK " + id, response)
+        this.props.disableEdit();
+        this.props.toggleRefresh();
+      })
+      .catch(error => console.log(error.message));
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.taskid !== prevProps.taskid) {
       console.log("NOW EDITING:", this.props.taskid);
@@ -217,9 +230,16 @@ class TaskEditor extends React.Component {
             {this.props.editing ? "Save" : "Create"}
           </Button>
           {this.props.editing ?
-            <Button onClick={this.props.disableEdit}>
-              Cancel
-                </Button>
+            <div>
+              <Button onClick={this.props.disableEdit}>
+                Cancel
+            </Button>
+              <Button
+                floated="right"
+                icon="alternate trash"
+                color="red"
+                onClick={() => this.deleteTask(this.props.taskid)} />
+            </div>
             : null}
         </Form>
       </div>

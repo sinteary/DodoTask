@@ -33,14 +33,14 @@ class TaskList extends React.Component {
       });
   }
 
-  deleteTask = (id) => {
-    console.log("delete triggered")
-    const url = `/api/v1/tasks/${id}`;
+  // deleteTask = (id) => {
+  //   console.log("delete triggered")
+  //   const url = `/api/v1/tasks/${id}`;
 
-    Axios.delete(url)
-      .then(this.getTasks)
-      .catch(error => console.log(error.message));
-  }
+  //   Axios.delete(url)
+  //     .then(this.getTasks)
+  //     .catch(error => console.log(error.message));
+  // }
 
   editTask = (id) => {
     //if current task being edited is different than prev
@@ -110,10 +110,6 @@ class TaskList extends React.Component {
           {getDate(task.duedate)}
         </Card.Content>
         {getTags(task.tags)}
-
-        {/* <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} /> */}
-
-
       </Card>
     ));
 
