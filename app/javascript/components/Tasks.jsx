@@ -2,7 +2,7 @@ import React from "react";
 import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
-import AllTaskLists from "./AllTaskLists";
+import TaskListsManager from "./TasklistsManager";
 import { Container, Sidebar } from 'semantic-ui-react';
 import Axios from "axios";
 
@@ -99,7 +99,7 @@ class TaskPage extends React.Component {
             </div>
 
             <div className="main-body">
-              <AllTaskLists
+              <TaskListsManager
                 taskid={this.state.taskid}
                 editing={this.state.editing}
                 editTask={this.editTask}
@@ -108,7 +108,7 @@ class TaskPage extends React.Component {
                 shouldRefresh={this.state.refresh}
                 addTask={this.addTask}
               >
-              </AllTaskLists>
+              </TaskListsManager>
 
             </div>
           </div>

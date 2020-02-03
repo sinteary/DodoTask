@@ -3,17 +3,24 @@ import TaskList from "./TaskList";
 import { Grid, Button, Icon, Modal, Form } from 'semantic-ui-react';
 import Axios from "axios";
 
-class AllTaskLists extends React.Component {
+class TaskListsManager extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tasklists: [],
       new_tasklist_name: "",
-      number_of_lists: 1
+      editor_open: false
     }
     this.onChange = this.onChange.bind(this);
     this.createTaskList = this.createTaskList.bind(this);
     this.getTaskLists = this.getTaskLists.bind(this)
+    this.toggleTasklistEditor = this.toggleTasklistEditor.bind(this);
+  }
+
+  toggleTasklistEditor() {
+    this.setState({
+      editor_open: !this.state.editor_open
+    })
   }
 
   createTaskList() {
@@ -23,6 +30,10 @@ class AllTaskLists extends React.Component {
     })
       .then(response => {
         console.log(response);
+        this.getTaskLists();
+        this.setState({
+          editor_open: false
+        })
       })
       .catch(error => {
         console.log(error);
@@ -74,12 +85,16 @@ class AllTaskLists extends React.Component {
 
     return (
       <div className="main-body">
-        <Modal size="small" trigger={
-          <Button
-            content="Add a new list"
-            icon="plus"
-            labelPosition="left">
-          </Button>}>
+        <Modal
+          size="small"
+          open={this.state.editor_open}
+          trigger={
+            <Button
+              onClick={this.toggleTasklistEditor}
+              content="Add a new list"
+              icon="plus"
+              labelPosition="left">
+            </Button>}>
           <Modal.Header>Create a new tasklist</Modal.Header>
           <Modal.Content>
             <Form>
@@ -95,11 +110,13 @@ class AllTaskLists extends React.Component {
                 />
               </Form.Field>
             </Form>
-            <p>Click anywhere outside this popup to cancel</p>
           </Modal.Content>
           <Modal.Actions>
             <Button color='green' onClick={this.createTaskList}>
               Create
+            </Button>
+            <Button onClick={this.toggleTasklistEditor}>
+              Cancel
             </Button>
           </Modal.Actions>
         </Modal>
@@ -113,4 +130,4 @@ class AllTaskLists extends React.Component {
 
 }
 
-export default AllTaskLists;
+export default TaskListsManager;

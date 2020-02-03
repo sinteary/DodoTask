@@ -33,15 +33,6 @@ class TaskList extends React.Component {
       });
   }
 
-  // deleteTask = (id) => {
-  //   console.log("delete triggered")
-  //   const url = `/api/v1/tasks/${id}`;
-
-  //   Axios.delete(url)
-  //     .then(this.getTasks)
-  //     .catch(error => console.log(error.message));
-  // }
-
   editTask = (id) => {
     //if current task being edited is different than prev
     if (id != this.props.taskid) {
