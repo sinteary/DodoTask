@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import TagsBar from "./TagsBar";
 import DatePicker from 'react-datepicker';
-import { Form, Input, Container, Button } from 'semantic-ui-react';
+import { Form, Input, Container, Button, Icon } from 'semantic-ui-react';
 import "react-datepicker/dist/react-datepicker.css";
 
 class TaskEditor extends React.Component {
@@ -129,8 +129,8 @@ class TaskEditor extends React.Component {
     return (
       <div className="taskeditor">
         <div>
-          <h2>{this.props.editing ? "Editing task" : "Add new task"}</h2>
-          <Button icon="close" onClick={this.props.disableEdit} />
+          <h2 style={{ float: "left" }}>{this.props.editing ? "Editing task" : "Add new task"}</h2>
+          <Button style={{ float: "right" }} icon="close" onClick={this.props.disableEdit}></Button>
         </div>
         <Form onSubmit={e => { e.preventDefault(); }}>
           <Form.Field>
@@ -164,7 +164,7 @@ class TaskEditor extends React.Component {
                   
                 </small> */}
           </Form.Field>
-          <Form.Group widths="equal">
+          <Form.Group>
             <Form.Field>
               <label htmlFor="datepicker"> Due date </label>
               <DatePicker
@@ -181,6 +181,9 @@ class TaskEditor extends React.Component {
                   />
                 }
               />
+            </Form.Field>
+
+            <Form.Field>
               <label htmlFor="timepicker"> Time </label>
               <DatePicker
                 id="timepicker"

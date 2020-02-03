@@ -113,8 +113,8 @@ class TaskList extends React.Component {
     return (
       <Card className="tasklist">
         <Card.Content>
-          <Card.Header>{this.props.name}</Card.Header>
-          <Button icon="plus" onClick={this.props.addTask}></Button>
+          <Card.Header style={{ float: "left" }}>{this.props.name}</Card.Header>
+          <Button size="tiny" style={{ float: "right" }} icon="plus" onClick={this.props.addTask} />
         </Card.Content>
         <Card.Content className="main-list">
           <div className="row">
