@@ -80,9 +80,9 @@ class TaskList extends React.Component {
     function getDate(duedate) {
       if (duedate !== null) {
         return (
-          <Card.Content>
-            {format(new Date(duedate), ('dd/MM/yyyy hh:mm a'))}
-          </Card.Content>
+          <Card.Description>
+            Due: {format(new Date(duedate), ('dd/MM/yyyy  hh:mm a'))}
+          </Card.Description>
         );
       }
     }
@@ -107,8 +107,8 @@ class TaskList extends React.Component {
           <Card.Description>
             <p>{task.description}</p>
           </Card.Description>
+          {getDate(task.duedate)}
         </Card.Content>
-        {getDate(task.duedate)}
         {getTags(task.tags)}
 
         {/* <Button floated="right" icon="alternate trash" color="red" onClick={() => this.deleteTask(task.id)} /> */}
