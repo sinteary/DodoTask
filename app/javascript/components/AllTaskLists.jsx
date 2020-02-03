@@ -58,20 +58,28 @@ class AllTaskLists extends React.Component {
 
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
-      <TaskList key={tasklist.id}
-        name={tasklist.name}
-        addTask={() => this.props.addTask(tasklist.id)}
-        tasklist_id={tasklist.id}
-        editTask={this.editTask}
-        toggleRefresh={this.props.toggleRefresh}
-        shouldRefresh={this.props.shouldRefresh}
-      >
-      </TaskList>
+      <div key={tasklist.id} className="tasklist-container">
+        <TaskList
+          key={tasklist.id}
+          name={tasklist.name}
+          addTask={() => this.props.addTask(tasklist.id)}
+          tasklist_id={tasklist.id}
+          editTask={this.editTask}
+          toggleRefresh={this.props.toggleRefresh}
+          shouldRefresh={this.props.shouldRefresh}
+        >
+        </TaskList>
+      </div>
     ));
 
     return (
-      <div>
-        <Modal size="small" trigger={<Button icon="plus"></Button>}>
+      <div className="main-body">
+        <Modal size="small" trigger={
+          <Button
+            content="Add a new list"
+            icon="plus"
+            labelPosition="left">
+          </Button>}>
           <Modal.Header>Create a new tasklist</Modal.Header>
           <Modal.Content>
             <Form>

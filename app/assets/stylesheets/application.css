@@ -123,20 +123,34 @@
 }
 
 .task-display {
-  height: '100vh';
-  size: fixed;
+  max-height: 100vh;
+}
+
+.main-body {
+  max-height: 100%;
+  max-width: fit-content;
 }
 
 .scroll_taskdisplay {
+  max-width: 1200px;
   overflow-x: scroll;
   overflow-y: hidden;
+  margin-right: 10px;
   margin-left: 10px;
   margin-top: 15px;
-  flex-direction: row;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
-.ui.card.tasklist {
-  float: left;
+.tasklist-container {
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  flex: 0 0 auto;
+}
+
+.content.main-list {
+  height: 500px;
+  size: fixed;
 }

@@ -98,7 +98,7 @@ class TaskPage extends React.Component {
               <TopBar></TopBar>
             </div>
 
-            <main className="container">
+            <div className="main-body">
               <AllTaskLists
                 taskid={this.state.taskid}
                 editing={this.state.editing}
@@ -110,7 +110,7 @@ class TaskPage extends React.Component {
               >
               </AllTaskLists>
 
-            </main>
+            </div>
           </div>
         </div>
       </>

@@ -116,7 +116,7 @@ class TaskList extends React.Component {
           <Card.Header>{this.props.name}</Card.Header>
           <Button icon="plus" onClick={this.props.addTask}></Button>
         </Card.Content>
-        <Card.Content>
+        <Card.Content className="main-list">
           <div className="row">
             {this.state.tasks.length > 0 ? allTasks : noTask}
           </div>
