@@ -72,17 +72,10 @@ class TaskListsManager extends React.Component {
 
   toggleEditTasklist(id) {
     console.log("EDIT TASKLIST" + id);
-    if (this.state.editing_tasklist) {
-      this.setState({
-        editing_tasklist: false,
-        tasklist_id: null
-      })
-    } else {
-      this.setState({
-        editing_tasklist: true,
-        tasklist_id: id
-      })
-    }
+    this.setState({
+      editing_tasklist: !this.state.editing_tasklist,
+      tasklist_id: id
+    })
   }
 
   saveEditChanges() {
@@ -91,35 +84,37 @@ class TaskListsManager extends React.Component {
       name: this.state.new_tasklist_name
     })
       .then(response => {
-        console.log("EDITED TASKLIST");
+        console.log("EDITED TASKLIST:", response);
+        this.toggleEditTasklist(null);
+        this.getTaskLists();
       })
       .catch(error => {
         console.log(error);
       })
   }
 
-  // componentDidUpdate(prevState) {
-  //   if (this.state.tasklist_id !== prevState.tasklist_id) {
-  //     console.log("EDITING TASKLIST: " + this.state.tasklist_id)
-  //     if (this.state.editing_tasklist) {
-  //       const url = `tasklists/${this.state.tasklist_id}`
-  //       Axios.get(url)
-  //         .then(response => {
-  //           console.log("GET TASKLIST " + response.data);
-  //           this.setState({
-  //             new_tasklist_name: response.data.name,
-  //           })
-  //         })
-  //         .catch(error => {
-  //           console.log("EDIT TASKLIST ERROR: ", error)
-  //         })
-  //     } else {
-  //       this.setState({
-  //         new_tasklist_name: ""
-  //       })
-  //     }
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.tasklist_id !== prevState.tasklist_id) {
+      console.log("EDITING TASKLIST: " + this.state.tasklist_id)
+      if (this.state.editing_tasklist) {
+        const url = `tasklists/${this.state.tasklist_id}`
+        Axios.get(url)
+          .then(response => {
+            console.log("GET TASKLIST " + response.data);
+            this.setState({
+              new_tasklist_name: response.data.name,
+            })
+          })
+          .catch(error => {
+            console.log("EDIT TASKLIST ERROR: ", error)
+          })
+      } else {
+        this.setState({
+          new_tasklist_name: ""
+        })
+      }
+    }
+  }
 
   render() {
     const allTaskLists = this.state.tasklists.map(tasklist => (
