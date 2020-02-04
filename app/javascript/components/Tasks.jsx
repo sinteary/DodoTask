@@ -3,8 +3,7 @@ import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import TaskListsManager from "./TasklistsManager";
-import { Container, Sidebar } from 'semantic-ui-react';
-import Axios from "axios";
+import { Sidebar } from 'semantic-ui-react';
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -106,8 +105,7 @@ class TaskPage extends React.Component {
                 disableEdit={this.disableEdit}
                 toggleRefresh={this.toggleRefresh}
                 shouldRefresh={this.state.refresh}
-                addTask={this.addTask}
-              >
+                addTask={this.addTask}>
               </TaskListsManager>
 
             </div>

@@ -19,6 +19,7 @@ class TaskListsManager extends React.Component {
     this.toggleTasklistCreator = this.toggleTasklistCreator.bind(this);
     this.toggleEditTasklist = this.toggleEditTasklist.bind(this);
     this.saveEditChanges = this.saveEditChanges.bind(this);
+    this.deleteTasklist = this.deleteTasklist.bind(this);
   }
 
   toggleTasklistCreator() {
@@ -93,6 +94,20 @@ class TaskListsManager extends React.Component {
       })
   }
 
+  deleteTasklist() {
+    console.log("DELETING: ", this.state.tasklist_id);
+    const url = `tasklists/${this.state.tasklist_id}`;
+    Axios.delete(url)
+      .then(response => {
+        console.log("DELETED TASKLIST: ", response);
+        this.toggleEditTasklist(null);
+        this.getTaskLists();
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.tasklist_id !== prevState.tasklist_id) {
       console.log("EDITING TASKLIST: " + this.state.tasklist_id)
@@ -164,6 +179,12 @@ class TaskListsManager extends React.Component {
             </Form>
           </Modal.Content>
           <Modal.Actions>
+
+            <Button
+              floated="right"
+              icon="alternate trash"
+              color="red"
+              onClick={this.deleteTasklist} />
             <Button
               color='green'
               onClick={this.state.editing_tasklist ? this.saveEditChanges : this.createTaskList}>
