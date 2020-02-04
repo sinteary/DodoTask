@@ -1,6 +1,11 @@
 # README
 
 ## CVWO 2020 Assignment
+Here is my task manager! It is currently a work in progress but here is a sneak peak:
+
+![preview](img/preview.PNG)
+
+It will be going online soon! So keep your eyes peeled :D
 
 ##### Name:
 Cynthia Lee Weng Yan
