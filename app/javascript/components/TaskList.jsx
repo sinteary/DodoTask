@@ -113,11 +113,13 @@ class TaskList extends React.Component {
       </div>
     );
 
+
     return (
       <Card className="tasklist">
         <Card.Content>
           <Card.Header style={{ float: "left" }}>{this.props.name}</Card.Header>
           <Button size="tiny" style={{ float: "right" }} icon="plus" onClick={this.props.addTask} />
+          <Button size="tiny" style={{ float: "right" }} icon="alternate pencil" onClick={() => { this.props.toggleEditTasklist(this.props.tasklist_id) }} />
         </Card.Content>
         <Card.Content className="main-list">
           <div className="row">

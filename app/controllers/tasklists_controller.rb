@@ -15,10 +15,6 @@ class TasklistsController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
-
   def show
     if tasklist
       render json: tasklist
@@ -31,6 +27,12 @@ class TasklistsController < ApplicationController
     tasklist = Tasklist.find(params[:id])
     tasklist.destroy
     head :no_content, status: :ok
+  end
+
+  def update
+    tasklist = Tasklist.find(params[:id])
+    tasklist.update_attributes(tasklist_params)
+    render json: tasklist
   end
 
   private
