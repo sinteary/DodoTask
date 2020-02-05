@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Axios from "axios";
 
 export default () => (
   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
@@ -10,14 +12,11 @@ export default () => (
           Manage all your tasks in a simple and efficient way.
         </p>
         <hr className="my-4" />
-        {/* Link: creates hyperlink to other pages */}
-        <Link
-          to="/tasks"
-          className="btn btn-lg custom-button"
-          role="button"
-        >
-          View Tasks
-        </Link>
+        <div>
+          <Link to='/login'>Log In</Link>
+          <br></br>
+          <Link to='/signup'>Sign Up</Link>
+        </div>
       </div>
     </div>
   </div>
