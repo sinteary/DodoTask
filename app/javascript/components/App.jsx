@@ -4,7 +4,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../components/Home";
 import Tasks from "../components/Tasks";
 import Login from "../components/Login";
+import Signup from "../components/Signup";
 import Axios from "axios";
+import TaskPage from "./Tasks";
 
 // export default props => <>{Routes}</>;
 
@@ -22,7 +24,7 @@ class App extends React.Component {
   }
 
   loginStatus = () => {
-    const url = 'http://localhost:3000/logged_in'
+    const url = 'logged_in'
     Axios.get(url, { withCredentials: true })
       .then(response => {
         if (response.data.logged_in) {
@@ -72,6 +74,16 @@ class App extends React.Component {
                 <Signup {...props}
                   handleLogin={this.handleLogin}
                   loggedInStatus={this.state.isLoggedIn} />)}
+            />
+            <Route
+              exact path='/tasks'
+              render={props => (
+                <TaskPage {...props}
+                  {...console.log(this.state.user)}
+                  user_id={this.state.user.id}
+                />
+              )}
+
             />
           </Switch>
         </BrowserRouter>

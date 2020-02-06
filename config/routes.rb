@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/logged_in', to: 'sessions#is_logged_in?'
 
-  resources :users, only: [ :create, :show, :index]
+  resources :users, only: [ :create, :show, :index], path: 'users'
   resources :tags, only: [ :create, :show, :destroy, :edit], path: 'tags'
   resources :tasklists, only: [:index, :create, :show, :destroy, :update], path: 'tasklists'
-  resources :users, only: [:create, :show, :index]
   namespace :api do
     namespace :v1 do
       # modify HTTP verb of create and destroy routes to post/delete data

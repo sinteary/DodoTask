@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_065419) do
+ActiveRecord::Schema.define(version: 2020_02_06_135124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,16 @@ ActiveRecord::Schema.define(version: 2020_02_05_065419) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "tasklists", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tasklists_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -53,5 +57,7 @@ ActiveRecord::Schema.define(version: 2020_02_05_065419) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "tags", "users"
+  add_foreign_key "tasklists", "users"
   add_foreign_key "tasks", "tasklists"
 end

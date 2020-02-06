@@ -1,6 +1,5 @@
 class TasklistsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  
+
   def index
     tasklist = Tasklist.all.order(created_at: :desc)
     render json: tasklist
@@ -37,7 +36,7 @@ class TasklistsController < ApplicationController
 
   private
   def tasklist_params
-    params.permit(:name)
+    params.permit(:name, :user_id, :tasklist)
   end
 
   def tasklist

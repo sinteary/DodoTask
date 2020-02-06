@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   
   def create
     tag = Tag.find_or_create_by(tag_params)

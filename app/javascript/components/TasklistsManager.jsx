@@ -11,7 +11,8 @@ class TaskListsManager extends React.Component {
       new_tasklist_name: "",
       editor_open: false,
       editing_tasklist: false,
-      tasklist_id: null
+      tasklist_id: null,
+      user_id: this.props.user_id
     }
     this.onChange = this.onChange.bind(this);
     this.createTaskList = this.createTaskList.bind(this);
@@ -20,6 +21,10 @@ class TaskListsManager extends React.Component {
     this.toggleEditTasklist = this.toggleEditTasklist.bind(this);
     this.saveEditChanges = this.saveEditChanges.bind(this);
     this.deleteTasklist = this.deleteTasklist.bind(this);
+  }
+
+  componentDidMount() {
+    this.getTaskLists();
   }
 
   toggleTasklistCreator() {
@@ -31,7 +36,8 @@ class TaskListsManager extends React.Component {
   createTaskList() {
     const url = "/tasklists";
     Axios.post(url, {
-      name: this.state.new_tasklist_name
+      name: this.state.new_tasklist_name,
+      user_id: this.props.user_id
     })
       .then(response => {
         console.log(response);
@@ -46,12 +52,12 @@ class TaskListsManager extends React.Component {
   }
 
   getTaskLists() {
-    const url = "/tasklists";
+    const url = `/users/${this.props.user_id}`;
     Axios.get(url)
       .then(response => {
-        console.log("FETCH TASKLISTS", response.data);
+        console.log("FETCH TASKLISTS", response.data.user.tasklists);
         this.setState({
-          tasklists: response.data,
+          tasklists: response.data.user.tasklists
         })
       })
       .catch(error => {
@@ -59,9 +65,7 @@ class TaskListsManager extends React.Component {
       })
   }
 
-  componentDidMount() {
-    this.getTaskLists();
-  }
+
 
   editTask = (id) => {
     this.props.editTask(id);
@@ -197,8 +201,8 @@ class TaskListsManager extends React.Component {
           </Modal.Actions>
         </Modal>
         <div className="scroll_taskdisplay">
-          {allTaskLists}
-        </div>
+          {this.state.tasklists.length > 0 ? allTaskLists : "Add a new tasklist to start tracking tasks!"}
+        </div>l
       </div >
     );
 

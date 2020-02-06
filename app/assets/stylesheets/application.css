@@ -137,6 +137,7 @@
 
 .scroll_taskdisplay {
   max-width: 1200px;
+  min-height: 600px;
   overflow-x: scroll;
   overflow-y: hidden;
   margin-right: 10px;

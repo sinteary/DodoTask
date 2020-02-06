@@ -81,6 +81,7 @@ class TaskPage extends React.Component {
                   adding={this.state.adding}
                   toggleRefresh={this.toggleRefresh}
                   disableEdit={this.disableEdit}
+                  user_id={this.props.user_id}
                 >
                 </TaskEditor>
               </Sidebar>
@@ -99,6 +100,7 @@ class TaskPage extends React.Component {
 
             <div className="main-body">
               <TaskListsManager
+                user_id={this.props.user_id}
                 taskid={this.state.taskid}
                 editing={this.state.editing}
                 editTask={this.editTask}

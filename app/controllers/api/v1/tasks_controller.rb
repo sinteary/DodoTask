@@ -1,5 +1,4 @@
 class Api::V1::TasksController < ApplicationController
-  skip_before_action :verify_authenticity_token
   
   def index
     if params[:status] == "done"
