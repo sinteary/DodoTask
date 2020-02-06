@@ -131,10 +131,6 @@
   max-width: fit-content;
 }
 
-/* .close-editor {
-  float: right;
-} */
-
 .scroll_taskdisplay {
   max-width: 1200px;
   min-height: 600px;
