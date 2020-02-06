@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   
   def create
-    tag = Tag.find_or_create_by(tag_params)
+    tag = Tag.find_or_create_by(params[:name])
     if tag
       render json: tag
     else

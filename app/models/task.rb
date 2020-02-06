@@ -14,7 +14,9 @@ class Task < ApplicationRecord
     def create_tags(tagslist)
       tagslist.each do |name|
         new_tag = Tag.create(name: name);
-        self.tags << new_tag
+        if(!self.tags.include?new_tag)
+          self.tags << new_tag
+        end
       end
     end
 
