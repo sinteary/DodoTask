@@ -7,6 +7,7 @@ import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Axios from "axios";
 import TaskPage from "./Tasks";
+import 'semantic-ui-css/semantic.min.css'
 
 // export default props => <>{Routes}</>;
 
