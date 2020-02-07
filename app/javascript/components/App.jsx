@@ -57,12 +57,12 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route
+            {/* <Route
               exact path='/'
               render={props => (
-                <Home {...props} loggedInStatus={this.state.isLoggedIn} />)} />
+                <Home {...props} loggedInStatus={this.state.isLoggedIn} />)} /> */}
             <Route
-              exact path='/login'
+              exact path='/'
               render={props => (
                 <Login {...props}
                   handleLogin={this.handleLogin}

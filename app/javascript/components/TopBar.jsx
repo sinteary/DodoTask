@@ -19,9 +19,8 @@ class TopBar extends React.Component {
 
     return (
       <div className="ui menu">
-        <a className="item">Editorials</a>
-        <a className="item">Reviews</a>
-        <a className="item">Upcoming Events</a>
+        <a className="item">Calendar (Coming soon!) </a>
+        <a className="item">Dashboard (Coming soon!) </a>
       </div>
     )
 

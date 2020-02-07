@@ -115,7 +115,6 @@
   border: none;
   border-radius: 5px;
   padding-bottom: 5px;
-
 }
 
 .form-group {
@@ -124,11 +123,14 @@
 
 .task-display {
   max-height: 100vh;
+  min-height: 100vh;
+  min-width: 1200px;
 }
 
 .main-body {
   max-height: 100%;
   max-width: fit-content;
+  min-width: inherit;
 }
 
 .scroll_taskdisplay {
@@ -157,4 +159,12 @@
   overflow-x: hidden;
   overflow-y: scroll;
   size: fixed;
+}
+
+.login-signup {
+ padding-top: 150px;
+}
+
+.signup-form {
+  padding-top: 150px;
 }

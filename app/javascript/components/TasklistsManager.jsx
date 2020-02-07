@@ -183,9 +183,8 @@ class TaskListsManager extends React.Component {
             </Form>
           </Modal.Content>
           <Modal.Actions>
-
             <Button
-              floated="right"
+              floated="left"
               icon="alternate trash"
               color="red"
               onClick={this.deleteTasklist} />

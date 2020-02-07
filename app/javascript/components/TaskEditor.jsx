@@ -143,7 +143,7 @@ class TaskEditor extends React.Component {
       <div className="taskeditor">
         <div>
           <h2 style={{ float: "left" }}>{this.props.editing ? "Editing task" : "Add new task"}</h2>
-          <Button style={{ float: "right" }} icon="close" onClick={this.props.disableEdit}></Button>
+          {/* <Button style={{ float: "right" }} icon="close" onClick={this.props.disableEdit}></Button> */}
         </div>
         <Form onSubmit={e => { e.preventDefault(); }}>
           <Form.Field>
@@ -226,14 +226,17 @@ class TaskEditor extends React.Component {
               editing={this.props.editing}
             ></TagsBar>
           </Form.Field>
-          <Button onClick={this.props.editing ? this.onEdit : this.onSubmit}>
-            {this.props.editing ? "Save" : "Create"}
+          <div style={{ float: "left" }}>
+            <Button onClick={this.props.editing ? this.onEdit : this.onSubmit}>
+              {this.props.editing ? "Save" : "Create"}
+            </Button>
+            <Button onClick={this.props.disableEdit}>
+              Cancel
           </Button>
+          </div>
           {this.props.editing ?
             <div>
-              <Button onClick={this.props.disableEdit}>
-                Cancel
-            </Button>
+
               <Button
                 floated="right"
                 icon="alternate trash"
