@@ -34,7 +34,7 @@ class Signup extends Component {
     var config = {
       headers: { 'Access-Control-Allow-Origin': '*' }
     };
-    axios.post('/users', { user }, config, { withCredentials: true })
+    axios.post('/users', { user }, { withCredentials: true })
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
