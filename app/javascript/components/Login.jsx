@@ -47,7 +47,7 @@ class Login extends Component {
       password: password
     }
 
-    axios.post('http://localhost:3000/login', { user }, { withCredentials: true })
+    axios.post('/login', { user }, { withCredentials: true })
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response.data)
