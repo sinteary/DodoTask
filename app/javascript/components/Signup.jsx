@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Form, Grid, Divider, Header, Segment, Button } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.css';
 
 class Signup extends Component {
   constructor(props) {

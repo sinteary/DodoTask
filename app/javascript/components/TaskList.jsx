@@ -3,6 +3,8 @@ import Axios from "axios";
 import TaskCheckbox from "./Buttons/TaskCheckbox";
 import { Card, Icon, Button, Label, Checkbox } from 'semantic-ui-react';
 import { format, compareAsc } from 'date-fns'
+import 'semantic-ui-css/semantic.css';
+
 
 class TaskList extends React.Component {
   constructor(props) {

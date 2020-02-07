@@ -1,5 +1,6 @@
 import React from "react";
 import TaskList from "./TaskList";
+import 'semantic-ui-css/semantic.css';
 import { Grid, Button, Icon, Modal, Form } from 'semantic-ui-react';
 import Axios from "axios";
 

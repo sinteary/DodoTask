@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import { Button, Divider, Form, Grid, Segment, Header } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.css';
+
 
 class Login extends Component {
   constructor(props) {
