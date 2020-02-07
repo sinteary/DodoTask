@@ -30,10 +30,15 @@ class Signup extends Component {
       password: password,
       password_confirmation: password_confirmation
     }
-    axios.post('/users', { user }, { withCredentials: true })
+
+    var config = {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    };
+    axios.post('/users', { user }, config, { withCredentials: true })
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
+          console.log("successful creation")
           this.redirect()
         } else {
           this.setState({
