@@ -1,8 +1,5 @@
 import React from "react";
-import Routes from "../routes/Index";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "../components/Home";
-import Tasks from "../components/Tasks";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Axios from "axios";
