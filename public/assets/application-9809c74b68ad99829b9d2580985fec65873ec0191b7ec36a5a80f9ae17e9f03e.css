@@ -1,0 +1,170 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+.bg_primary-color {
+  background-color: #FFFFFF;
+}
+.primary-color {
+  background-color: #FFFFFF;
+}
+.bg_secondary-color {
+  background-color: #116b11;
+}
+.secondary-color {
+  color: #1f1f29;
+}
+.custom-button.btn {
+  background-color: #0a448f;
+  color: #FFF;
+  border: none;
+}
+.custom-button.btn:hover {
+  color: #FFF !important;
+  border: none;
+}
+.hero {
+  width: 100vw;
+  height: 50vh;
+}
+.hero img {
+  object-fit: cover;
+  object-position: top;
+  height: 100%;
+  width: 100%;
+}
+.overlay {
+  height: 100%;
+  width: 100%;
+  opacity: 1.0;
+}
+
+/* .done-checkbox {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgb(212, 208, 208);
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+.done-checkbox:checked {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border:1px solid;
+  border-color: rgb(27, 172, 47);
+  background-color: #b1ebb1;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.done-checkbox:checked:after {
+  content:'\2714';
+  font-size: 13px;
+  color: #1f1f29;
+  position: absolute;
+  vertical-align: middle;
+} */
+.ui.left.overlay.sidebar{
+  width: 100%
+}
+
+.task-label {
+  font-size: 16px;
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+.taskeditor {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.side-taskbar {
+  min-width: 300px;
+  height: 100vh;
+  size: fixed;  
+}
+
+.homepage {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.create-button {
+  background-color: #0a448f;
+  color: #FFF;
+  border: none;
+  border-radius: 5px;
+  padding-bottom: 5px;
+}
+
+.form-group {
+  size: fixed;
+}
+
+.task-display {
+  max-height: 100vh;
+  min-height: 100vh;
+  min-width: 1200px;
+}
+
+.main-body {
+  max-height: 100%;
+  max-width: fit-content;
+  min-width: inherit;
+}
+
+.scroll_taskdisplay {
+  max-width: 1200px;
+  min-height: 600px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tasklist-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  flex: 0 0 auto;
+}
+
+.content.main-list {
+  min-height: 500px;
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  size: fixed;
+}
+
+.login-signup {
+ padding-top: 150px;
+}
+
+.signup-form {
+  padding-top: 150px;
+}
