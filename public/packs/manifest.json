@@ -1,42 +1,31 @@
 {
-  "Index.css": "/packs/css/Index-c2a1dc6d.css",
-  "Index.js": "/packs/js/Index-e463e58de97650b8b9cc.js",
-  "Index.js.map": "/packs/js/Index-e463e58de97650b8b9cc.js.map",
-  "application.css": "/packs/css/application-c27972ba.css",
-  "application.js": "/packs/js/application-e23e5d02f739201f6f20.js",
-  "application.js.map": "/packs/js/application-e23e5d02f739201f6f20.js.map",
+  "Index.js": "/packs/js/Index-6c3edd9c4f2472ccfc40.js",
+  "Index.js.map": "/packs/js/Index-6c3edd9c4f2472ccfc40.js.map",
+  "application.js": "/packs/js/application-dc78833050325ee6bb77.js",
+  "application.js.map": "/packs/js/application-dc78833050325ee6bb77.js.map",
   "entrypoints": {
     "application": {
-      "css": [
-        "/packs/css/application-c27972ba.css"
-      ],
       "js": [
-        "/packs/js/application-e23e5d02f739201f6f20.js"
+        "/packs/js/application-dc78833050325ee6bb77.js"
       ],
       "js.map": [
-        "/packs/js/application-e23e5d02f739201f6f20.js.map"
+        "/packs/js/application-dc78833050325ee6bb77.js.map"
       ]
     },
     "Index": {
-      "css": [
-        "/packs/css/Index-c2a1dc6d.css"
-      ],
       "js": [
-        "/packs/js/Index-e463e58de97650b8b9cc.js"
+        "/packs/js/Index-6c3edd9c4f2472ccfc40.js"
       ],
       "js.map": [
-        "/packs/js/Index-e463e58de97650b8b9cc.js.map"
+        "/packs/js/Index-6c3edd9c4f2472ccfc40.js.map"
       ]
     },
     "server_rendering": {
-      "css": [
-        "/packs/css/server_rendering-6acb6998.css"
-      ],
       "js": [
-        "/packs/js/server_rendering-25a0e8fbe6440ca60774.js"
+        "/packs/js/server_rendering-3a6774fda280b2086947.js"
       ],
       "js.map": [
-        "/packs/js/server_rendering-25a0e8fbe6440ca60774.js.map"
+        "/packs/js/server_rendering-3a6774fda280b2086947.js.map"
       ]
     }
   },
@@ -56,7 +45,6 @@
   "media/fonts/outline-icons.woff": "/packs/media/fonts/outline-icons-ef60a4f6.woff",
   "media/fonts/outline-icons.woff2": "/packs/media/fonts/outline-icons-cd6c777f.woff2",
   "media/images/flags.png": "/packs/media/images/flags-9c74e172.png",
-  "server_rendering.css": "/packs/css/server_rendering-6acb6998.css",
-  "server_rendering.js": "/packs/js/server_rendering-25a0e8fbe6440ca60774.js",
-  "server_rendering.js.map": "/packs/js/server_rendering-25a0e8fbe6440ca60774.js.map"
+  "server_rendering.js": "/packs/js/server_rendering-3a6774fda280b2086947.js",
+  "server_rendering.js.map": "/packs/js/server_rendering-3a6774fda280b2086947.js.map"
 }
