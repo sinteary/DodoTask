@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/logged_in', to: 'sessions#is_logged_in?'
 
   resources :users, only: [ :create, :show, :index], path: 'users'
-  resources :tags, only: [ :create, :show, :destroy, :edit], path: 'tags'
+  resources :tags, only: [ :index, :create, :show, :destroy, :edit], path: 'tags'
   resources :tasklists, only: [:index, :create, :show, :destroy, :update], path: 'tasklists'
   namespace :api do
     namespace :v1 do

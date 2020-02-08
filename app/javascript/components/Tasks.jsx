@@ -3,6 +3,7 @@ import TaskEditor from "./TaskEditor";
 import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import TaskListsManager from "./TasklistsManager";
+import SearchManager from "./SearchManager";
 import { Sidebar } from 'semantic-ui-react';
 
 class TaskPage extends React.Component {
@@ -14,11 +15,14 @@ class TaskPage extends React.Component {
       adding: false,
       taskid: null,
       tasklistid: null,
-      refresh: false
+      refresh: false,
+      search: false
     };
     this.disableEdit = this.disableEdit.bind(this);
     this.toggleRefresh = this.toggleRefresh.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
+    this.disableSeach = this.disableSeach.bind(this);
   }
 
   editTask = (id) => {
@@ -63,6 +67,20 @@ class TaskPage extends React.Component {
     })
   }
 
+  toggleSearch() {
+    console.log("SEARCH TOGGLED")
+    this.setState({
+      search: true
+    })
+  }
+
+  disableSeach() {
+    console.log("SEARCH DISABLED")
+    this.setState({
+      search: false
+    })
+  }
+
   render() {
     return (
       <>
@@ -95,21 +113,28 @@ class TaskPage extends React.Component {
 
           <div className="task-display">
             <div className="top-menu-bar">
-              <TopBar></TopBar>
+              <TopBar
+                toggleSearch={this.toggleSearch}
+                disableEdit={this.disableSeach}
+              />
             </div>
 
             <div className="main-body">
-              <TaskListsManager
-                user_id={this.props.user_id}
-                taskid={this.state.taskid}
-                editing={this.state.editing}
-                editTask={this.editTask}
-                disableEdit={this.disableEdit}
-                toggleRefresh={this.toggleRefresh}
-                shouldRefresh={this.state.refresh}
-                addTask={this.addTask}>
-              </TaskListsManager>
-
+              {this.state.search ?
+                <SearchManager
+                />
+                :
+                <TaskListsManager
+                  user_id={this.props.user_id}
+                  taskid={this.state.taskid}
+                  editing={this.state.editing}
+                  editTask={this.editTask}
+                  disableEdit={this.disableEdit}
+                  toggleRefresh={this.toggleRefresh}
+                  shouldRefresh={this.state.refresh}
+                  addTask={this.addTask}>
+                </TaskListsManager>
+              }
             </div>
           </div>
         </div>

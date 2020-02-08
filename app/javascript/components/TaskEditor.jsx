@@ -71,7 +71,8 @@ class TaskEditor extends React.Component {
       done: false,
       duedate: combinedDate,
       tags: this.state.tags,
-      tasklist_id: this.props.tasklistid
+      tasklist_id: this.props.tasklistid,
+      user_id: this.props.user_id
     })
       .then((response) => {
         console.log(response);
@@ -90,7 +91,8 @@ class TaskEditor extends React.Component {
       name: this.state.name,
       description: this.state.description,
       duedate: combinedDate,
-      tags: this.state.tags
+      tags: this.state.tags,
+      user_id: this.props.user_id
     })
       .then(response => {
         console.log("EDIT RESPONSE DATA:", response.data);
@@ -223,7 +225,6 @@ class TaskEditor extends React.Component {
           <Form.Field>
             <TagsBar
               current_tags={this.state.tags}
-              editing={this.props.editing}
             ></TagsBar>
           </Form.Field>
           <div style={{ float: "left" }}>

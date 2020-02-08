@@ -1,5 +1,9 @@
 class TagsController < ApplicationController
+  def index
   
+    
+  end
+
   def create
     tag = Tag.find_or_create_by(params[:name])
     if tag

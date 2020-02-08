@@ -23,7 +23,7 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     task = Task.create!(task_params)
-    task.create_tags(params[:tags])
+    task.create_tags(params[:tags], params[:user_id])
     
     # task.add_to_list(params[:tasklistid])
     if task
@@ -36,7 +36,7 @@ class Api::V1::TasksController < ApplicationController
   def edit
     task = Task.find(params[:id])
     task.update_attributes(task_params)
-    task.update_tags(params[:tags])
+    task.update_tags(params[:tags], params[:user_id])
     render json: task
   end
 
@@ -48,7 +48,7 @@ class Api::V1::TasksController < ApplicationController
 
   private
   def task_params
-    params.permit(:name, :description, :done, :duedate, :tags, :tasklist_id)
+    params.require(:task).permit(:name, :description, :done, :duedate, :tags, :tasklist_id, :user_id)
   end
 
   def task

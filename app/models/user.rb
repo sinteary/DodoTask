@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :tasklists
+  has_many :tags
 
   validates :username, presence: true
   validates :username, uniqueness: true
@@ -13,7 +14,8 @@ class User < ApplicationRecord
   def as_json(options={})
     super(:except => [:created_at, :updated_at],
           :include => { 
-            :tasklists => {}
+            :tasklists => {},
+            :tags => {}
           })
   end
 
