@@ -44,29 +44,31 @@ class TaskCards extends React.Component {
     }
 
     const allTasks = this.props.tasks.map(task => (
-      <Card key={task.id}>
-        <Card.Content>
-          <div>
-            <TaskCheckbox
-              style={{ float: "left" }}
-              label={task.name}
-              task_status={task.done}
-              refresh={this.props.getTasks}
-              task_id={task.id}
-            />
-            <Icon
-              style={{ float: "right" }}
-              link name="alternate pencil"
-              color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
-              onClick={() => this.props.editTask(task.id)} />
-          </div>
-          <Card.Description>
-            <p>{task.description}</p>
-          </Card.Description>
-          {getDate(task.duedate)}
-        </Card.Content>
-        {getTags(task.tags)}
-      </Card>
+      <div className="taskcard">
+        <Card key={task.id}>
+          <Card.Content>
+            <div>
+              <TaskCheckbox
+                style={{ float: "left" }}
+                label={task.name}
+                task_status={task.done}
+                refresh={this.props.getTasks}
+                task_id={task.id}
+              />
+              <Icon
+                style={{ float: "right" }}
+                link name="alternate pencil"
+                color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
+                onClick={() => this.props.editTask(task.id)} />
+            </div>
+            <Card.Description>
+              <p>{task.description}</p>
+            </Card.Description>
+            {getDate(task.duedate)}
+          </Card.Content>
+          {getTags(task.tags)}
+        </Card>
+      </div>
     ));
 
     return (

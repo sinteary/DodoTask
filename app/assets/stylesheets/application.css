@@ -196,3 +196,10 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.taskcard {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

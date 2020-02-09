@@ -7,7 +7,11 @@ class Tag < ApplicationRecord
   def as_json(options={})
     super(:except => [:created_at, :updated_at],
           :include => {
-            :tasks => {}
+            :tasks => {
+              :include => {
+                :tags => {}
+              }
+            }
           })
   end
 end

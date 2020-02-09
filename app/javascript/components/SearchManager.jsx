@@ -3,6 +3,7 @@ import 'semantic-ui-css/semantic.css';
 import { Search, Form, Button, Grid, Container, Card, Header, Segment } from 'semantic-ui-react';
 import Axios from "axios";
 import TagsBar from "./TagsBar";
+import TaskCards from "./TaskCards";
 
 class SearchManager extends React.Component {
   constructor(props) {
@@ -32,21 +33,12 @@ class SearchManager extends React.Component {
       })
   }
 
-  componentDidUpdate(prevState, prevProps) {
-    console.log("PREV", prevState.queries);
-    console.log("CURR", this.state.queries);
-    if (this.state.queries !== prevState.queries) {
-      console.log("TAG SEARCH", this.state.queries)
-      const url = `/tags`
-      Axios.get(url, {
-        queries: this.state.queries
-      })
-        .then(response => {
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log("ERROR RETRIEVING SEARCHED TAGS", error)
-        })
+  componentDidUpdate(prevProps) {
+    if (this.props.shouldRefresh !== prevProps.shouldRefresh) {
+      if (this.props.shouldRefresh) {
+        this.handleSearch();
+        this.props.toggleRefresh();
+      }
     }
   }
 
@@ -76,21 +68,19 @@ class SearchManager extends React.Component {
         <Grid.Row>
           <Segment raised>
             <Header>{tag.name}</Header>
-            <div className="tag-container">
-              <Container>
-                <Grid>
-                  {tag.tasks.map(task => (
-                    <Grid.Column key={task.id}>
-                      <Card>
-                        <Card.Content>
-                          {task.name}
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                  ))}
-                </Grid>
-              </Container>
-            </div>
+            {tag.tasks.length > 0 ?
+              <div className="tag-container">
+                <Container>
+                  <Grid>
+                    <TaskCards
+                      tasks={tag.tasks}
+                      editTask={this.props.editTask}
+                      getTasks={this.props.toggleRefresh}
+                    />
+                  </Grid>
+                </Container>
+              </div>
+              : <p>No tasks with this tag.</p>}
           </Segment>
         </Grid.Row>
       </div>
