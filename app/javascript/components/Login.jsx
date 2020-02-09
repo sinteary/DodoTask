@@ -9,7 +9,6 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
       errors: ''
@@ -42,9 +41,8 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { username, email, password } = this.state
+    const { email, password } = this.state
     let user = {
-      username: username,
       email: email,
       password: password
     }
@@ -66,11 +64,10 @@ class Login extends Component {
   redirectToSignup = () => {
     console.log("redirect to signup");
     this.props.history.push('/signup')
-    // return (<Redirect to="/signup" />);
   }
 
   render() {
-    const { username, email, password } = this.state
+    const { email, password } = this.state
     return (
       <div>
         <div className="login-signup">
@@ -79,7 +76,7 @@ class Login extends Component {
             <Grid columns={2} relaxed='very' stackable>
               <Grid.Column>
                 <Form>
-                  <Form.Input
+                  {/* <Form.Input
                     icon='user'
                     iconPosition='left'
                     label='Username'
@@ -87,7 +84,7 @@ class Login extends Component {
                     value={username}
                     name="username"
                     onChange={this.handleChange}
-                  />
+                  /> */}
                   <Form.Input
                     icon='mail'
                     iconPosition='left'
@@ -119,11 +116,6 @@ class Login extends Component {
 
             <Divider vertical>Or</Divider>
           </Segment>
-
-          {/* or <Link to='/signup'>sign up</Link>
-      </div>
-
-        </form > */}
           <div>
             {
               this.state.errors ? this.handleErrors() : null

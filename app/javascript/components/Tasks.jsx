@@ -105,9 +105,6 @@ class TaskPage extends React.Component {
               </Sidebar>
               <Sidebar.Pusher>
                 <div className="side-taskbar" >
-                  {/* <div>
-                    <Header>{this.props.username}'s Tasks</Header>
-                  </div> */}
                   {/* style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }} */}
                 </div>
               </Sidebar.Pusher>

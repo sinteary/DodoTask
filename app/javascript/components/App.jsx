@@ -82,7 +82,6 @@ class App extends React.Component {
                 <TaskPage {...props}
                   {...console.log(this.state.user)}
                   user_id={this.state.user.id}
-                  username={this.state.user.username}
                 />
               )}
 

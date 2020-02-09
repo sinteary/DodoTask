@@ -3,9 +3,7 @@ class User < ApplicationRecord
   has_many :tasklists
   has_many :tags
 
-  validates :username, presence: true
-  validates :username, uniqueness: true
-  validates :username, length: { minimum: 4 }
+  validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, uniqueness: true
 

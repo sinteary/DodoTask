@@ -7,7 +7,6 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
       password_confirmation: '',
@@ -24,9 +23,8 @@ class Signup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { username, email, password, password_confirmation } = this.state
+    const { email, password, password_confirmation } = this.state
     let user = {
-      username: username,
       email: email,
       password: password,
       password_confirmation: password_confirmation
@@ -62,7 +60,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { username, email, password, password_confirmation } = this.state
+    const { email, password, password_confirmation } = this.state
     return (
       <div>
         <div className="signup-form">
@@ -71,7 +69,7 @@ class Signup extends Component {
             <Grid columns={1} relaxed='very' stackable>
               <Grid.Column>
                 <Form>
-                  <Form.Input
+                  {/* <Form.Input
                     icon='user'
                     iconPosition='left'
                     label='Username'
@@ -79,7 +77,7 @@ class Signup extends Component {
                     value={username}
                     name="username"
                     onChange={this.handleChange}
-                  />
+                  /> */}
                   <Form.Input
                     icon='mail'
                     iconPosition='left'
@@ -108,50 +106,11 @@ class Signup extends Component {
                     name="password_confirmation"
                     onChange={this.handleChange}
                   />
-
                   <Button content='Sign up!' primary onClick={this.handleSubmit} />
                 </Form>
               </Grid.Column>
             </Grid>
           </Segment>
-
-
-          {/* <h1>Sign Up</h1>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              placeholder="username"
-              type="text"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="email"
-              type="text"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="password confirmation"
-              type="password"
-              name="password_confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-            />
-
-            <button placeholder="submit" type="submit">
-              Sign Up
-          </button>
-
-          </form> */}
         </div>
       </div>
     );
