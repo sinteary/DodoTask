@@ -1,0 +1,62 @@
+{
+  "Index.css": "/packs/css/Index-405a5ee8.css",
+  "Index.js": "/packs/js/Index-babac8e403f75b68ea21.js",
+  "Index.js.map": "/packs/js/Index-babac8e403f75b68ea21.js.map",
+  "application.css": "/packs/css/application-4ec8ccb7.css",
+  "application.js": "/packs/js/application-4725a587592dc631313a.js",
+  "application.js.map": "/packs/js/application-4725a587592dc631313a.js.map",
+  "entrypoints": {
+    "application": {
+      "css": [
+        "/packs/css/application-4ec8ccb7.css"
+      ],
+      "js": [
+        "/packs/js/application-4725a587592dc631313a.js"
+      ],
+      "js.map": [
+        "/packs/js/application-4725a587592dc631313a.js.map"
+      ]
+    },
+    "Index": {
+      "css": [
+        "/packs/css/Index-405a5ee8.css"
+      ],
+      "js": [
+        "/packs/js/Index-babac8e403f75b68ea21.js"
+      ],
+      "js.map": [
+        "/packs/js/Index-babac8e403f75b68ea21.js.map"
+      ]
+    },
+    "server_rendering": {
+      "css": [
+        "/packs/css/server_rendering-308e05e6.css"
+      ],
+      "js": [
+        "/packs/js/server_rendering-196244fb575aee2477ce.js"
+      ],
+      "js.map": [
+        "/packs/js/server_rendering-196244fb575aee2477ce.js.map"
+      ]
+    }
+  },
+  "media/fonts/brand-icons.eot": "/packs/media/fonts/brand-icons-13db00b7.eot",
+  "media/fonts/brand-icons.svg": "/packs/media/fonts/brand-icons-a1a749e8.svg",
+  "media/fonts/brand-icons.ttf": "/packs/media/fonts/brand-icons-c5ebe0b3.ttf",
+  "media/fonts/brand-icons.woff": "/packs/media/fonts/brand-icons-a046592b.woff",
+  "media/fonts/brand-icons.woff2": "/packs/media/fonts/brand-icons-e8c322de.woff2",
+  "media/fonts/icons.eot": "/packs/media/fonts/icons-8e3c7f55.eot",
+  "media/fonts/icons.svg": "/packs/media/fonts/icons-962a1bf3.svg",
+  "media/fonts/icons.ttf": "/packs/media/fonts/icons-b87b9ba5.ttf",
+  "media/fonts/icons.woff": "/packs/media/fonts/icons-faff9214.woff",
+  "media/fonts/icons.woff2": "/packs/media/fonts/icons-0ab54153.woff2",
+  "media/fonts/outline-icons.eot": "/packs/media/fonts/outline-icons-701ae6ab.eot",
+  "media/fonts/outline-icons.svg": "/packs/media/fonts/outline-icons-82f60bd0.svg",
+  "media/fonts/outline-icons.ttf": "/packs/media/fonts/outline-icons-ad97afd3.ttf",
+  "media/fonts/outline-icons.woff": "/packs/media/fonts/outline-icons-ef60a4f6.woff",
+  "media/fonts/outline-icons.woff2": "/packs/media/fonts/outline-icons-cd6c777f.woff2",
+  "media/images/flags.png": "/packs/media/images/flags-9c74e172.png",
+  "server_rendering.css": "/packs/css/server_rendering-308e05e6.css",
+  "server_rendering.js": "/packs/js/server_rendering-196244fb575aee2477ce.js",
+  "server_rendering.js.map": "/packs/js/server_rendering-196244fb575aee2477ce.js.map"
+}
