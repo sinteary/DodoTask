@@ -4,7 +4,7 @@
 
 Task Manager: https://dodo-task.herokuapp.com/
 
-![preview](img/preview.PNG)
+![preview](img/newpreview.PNG)
 
 
 ##### Name:
