@@ -64,20 +64,13 @@ class Signup extends Component {
     return (
       <div>
         <div className="signup-form">
-          <Header as='h1'>Create a new Account</Header>
+          <div className="login-header">
+            <Header as='h1'>Create an Account</Header>
+          </div>
           <Segment placeholder>
             <Grid columns={1} relaxed='very' stackable>
               <Grid.Column>
                 <Form>
-                  {/* <Form.Input
-                    icon='user'
-                    iconPosition='left'
-                    label='Username'
-                    placeholder='Username'
-                    value={username}
-                    name="username"
-                    onChange={this.handleChange}
-                  /> */}
                   <Form.Input
                     icon='mail'
                     iconPosition='left'
@@ -87,7 +80,6 @@ class Signup extends Component {
                     name="email"
                     onChange={this.handleChange}
                   />
-
                   <Form.Input
                     icon='lock'
                     iconPosition='left'

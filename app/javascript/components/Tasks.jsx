@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import TaskListsManager from "./TasklistsManager";
 import SearchManager from "./SearchManager";
-import { Sidebar, Header } from 'semantic-ui-react';
+import { Sidebar } from 'semantic-ui-react';
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -104,9 +104,7 @@ class TaskPage extends React.Component {
                 </TaskEditor>
               </Sidebar>
               <Sidebar.Pusher>
-                <div className="side-taskbar" >
-                  {/* style={{ backgroundColor: this.state.editing ? '#C5F9A2' : '#98c4ff' }} */}
-                </div>
+                <div className="side-taskbar" />
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           </div>

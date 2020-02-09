@@ -153,6 +153,13 @@
   flex: 0 0 auto;
 }
 
+.add-list-button {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .content.main-list {
   min-height: 500px;
   max-height: 500px;
@@ -162,7 +169,10 @@
 }
 
 .login-signup {
- padding-top: 150px;
+  padding-top: 150px;
+}
+.login-header {
+  padding-left: 45%
 }
 
 .signup-form {
@@ -179,7 +189,7 @@
 }
 .search-button {
   float: left;
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 .search-results {

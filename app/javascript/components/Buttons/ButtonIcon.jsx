@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React from 'react'
 import { Button, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 
@@ -9,7 +9,7 @@ const ButtonIcon = (props) => (
     color={props.btncolor}>
     <Icon className="icon"
       name={props.icontype}
-     />
+    />
   </Button>
 )
 

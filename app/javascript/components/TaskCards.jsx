@@ -44,8 +44,8 @@ class TaskCards extends React.Component {
     }
 
     const allTasks = this.props.tasks.map(task => (
-      <div className="taskcard">
-        <Card key={task.id}>
+      <div key={task.id} className="taskcard">
+        <Card>
           <Card.Content>
             <div>
               <TaskCheckbox

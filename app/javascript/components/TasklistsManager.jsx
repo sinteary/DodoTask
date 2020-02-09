@@ -159,12 +159,15 @@ class TaskListsManager extends React.Component {
           size="small"
           open={this.state.editor_open || this.state.editing_tasklist}
           trigger={
-            <Button
-              onClick={this.toggleTasklistCreator}
-              content="Add a new list"
-              icon="plus"
-              labelPosition="left">
-            </Button>}>
+            <div className="add-list-button">
+              <Button
+                onClick={this.toggleTasklistCreator}
+                content="Add a new list"
+                icon="plus"
+                labelPosition="left"
+              />
+            </div>
+          }>
           <Modal.Header>{this.state.editing_tasklist ? "Edit tasklist:" : "Create a new tasklist"}</Modal.Header>
           <Modal.Content>
             <Form>

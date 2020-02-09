@@ -1,15 +1,10 @@
 import React from "react";
-import Routes from "../routes/Index";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "../components/Home";
-import Tasks from "../components/Tasks";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Axios from "axios";
 import TaskPage from "./Tasks";
 import 'semantic-ui-css/semantic.css';
-
-// export default props => <>{Routes}</>;
 
 class App extends React.Component {
   constructor(props) {
@@ -58,10 +53,6 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Switch>
-            {/* <Route
-              exact path='/'
-              render={props => (
-                <Home {...props} loggedInStatus={this.state.isLoggedIn} />)} /> */}
             <Route
               exact path='/'
               render={props => (

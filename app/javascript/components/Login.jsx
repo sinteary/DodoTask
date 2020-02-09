@@ -71,20 +71,13 @@ class Login extends Component {
     return (
       <div>
         <div className="login-signup">
-          <Header as='h1'>Task Manager</Header>
+          <div className="login-header">
+            <Header as='h1'>Task Manager</Header>
+          </div>
           <Segment placeholder>
             <Grid columns={2} relaxed='very' stackable>
               <Grid.Column>
                 <Form>
-                  {/* <Form.Input
-                    icon='user'
-                    iconPosition='left'
-                    label='Username'
-                    placeholder='Username'
-                    value={username}
-                    name="username"
-                    onChange={this.handleChange}
-                  /> */}
                   <Form.Input
                     icon='mail'
                     iconPosition='left'
@@ -94,7 +87,6 @@ class Login extends Component {
                     name="email"
                     onChange={this.handleChange}
                   />
-
                   <Form.Input
                     icon='lock'
                     iconPosition='left'
@@ -104,11 +96,9 @@ class Login extends Component {
                     name="password"
                     onChange={this.handleChange}
                   />
-
                   <Button content='Login' primary onClick={this.handleSubmit} />
                 </Form>
               </Grid.Column>
-
               <Grid.Column verticalAlign='middle'>
                 <Button content='Sign up' icon='signup' size='big' onClick={this.redirectToSignup} />
               </Grid.Column>
