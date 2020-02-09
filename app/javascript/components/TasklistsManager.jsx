@@ -202,7 +202,7 @@ class TaskListsManager extends React.Component {
         </Modal>
         <div className="scroll_taskdisplay">
           {this.state.tasklists.length > 0 ? allTaskLists : "Add a new tasklist to start tracking tasks!"}
-        </div>l
+        </div>
       </div >
     );
 

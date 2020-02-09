@@ -1,6 +1,12 @@
 class TagsController < ApplicationController
   def index
-  
+    # tag = Tag.where("name = ? AND user_id = ?", params[:queries], params[:user_id]);
+    tag = Tag.where(name: params[:queries], user_id: params[:user_id]);
+    if tag
+      render json: tag
+    else
+      render json: tag.errors
+    end
     
   end
 
@@ -33,7 +39,7 @@ class TagsController < ApplicationController
 
   private
   def tag_params
-    params.permit(:name)
+    params.permit(:name, :queries, :user_id)
   end
 
   def tag

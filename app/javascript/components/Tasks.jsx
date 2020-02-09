@@ -22,7 +22,7 @@ class TaskPage extends React.Component {
     this.toggleRefresh = this.toggleRefresh.bind(this);
     this.addTask = this.addTask.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
-    this.disableSeach = this.disableSeach.bind(this);
+    this.disableSearch = this.disableSearch.bind(this);
   }
 
   editTask = (id) => {
@@ -74,7 +74,7 @@ class TaskPage extends React.Component {
     })
   }
 
-  disableSeach() {
+  disableSearch() {
     console.log("SEARCH DISABLED")
     this.setState({
       search: false
@@ -115,15 +115,14 @@ class TaskPage extends React.Component {
             <div className="top-menu-bar">
               <TopBar
                 toggleSearch={this.toggleSearch}
-                disableEdit={this.disableSeach}
+                disableSearch={this.disableSearch}
               />
             </div>
-
-            <div className="main-body">
-              {this.state.search ?
-                <SearchManager
-                />
-                :
+            {this.state.search ?
+              <SearchManager
+                user_id={this.props.user_id} />
+              :
+              <div className="main-body">
                 <TaskListsManager
                   user_id={this.props.user_id}
                   taskid={this.state.taskid}
@@ -132,11 +131,11 @@ class TaskPage extends React.Component {
                   disableEdit={this.disableEdit}
                   toggleRefresh={this.toggleRefresh}
                   shouldRefresh={this.state.refresh}
-                  addTask={this.addTask}>
-                </TaskListsManager>
-              }
-            </div>
+                  addTask={this.addTask} />
+              </div>
+            }
           </div>
+
         </div>
       </>
     );

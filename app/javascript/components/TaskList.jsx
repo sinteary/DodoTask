@@ -4,6 +4,7 @@ import TaskCheckbox from "./Buttons/TaskCheckbox";
 import { Card, Icon, Button, Label, Checkbox } from 'semantic-ui-react';
 import { format, compareAsc } from 'date-fns'
 import 'semantic-ui-css/semantic.css';
+import TaskCards from "./TaskCards"
 
 
 class TaskList extends React.Component {
@@ -13,6 +14,7 @@ class TaskList extends React.Component {
       tasks: []
     };
     this.getTasks = this.getTasks.bind(this);
+    this.editTask = this.editTask.bind(this);
   }
 
   componentDidMount() {
@@ -57,54 +59,54 @@ class TaskList extends React.Component {
   render() {
     const { tasks } = this.state;
 
-    function getTags(tags) {
-      if (tags.length > 0) {
-        return (
-          <Card.Content>
-            {tags.map((tag, index) => (
-              <Label color={"blue"} size={"small"} key={index} as='a'>
-                {tag.name}
-              </Label>))}
-          </Card.Content>
-        );
-      }
-    }
+    // function getTags(tags) {
+    //   if (tags.length > 0) {
+    //     return (
+    //       <Card.Content>
+    //         {tags.map((tag, index) => (
+    //           <Label color={"blue"} size={"small"} key={index} as='a'>
+    //             {tag.name}
+    //           </Label>))}
+    //       </Card.Content>
+    //     );
+    //   }
+    // }
 
-    function getDate(duedate) {
-      if (duedate !== null) {
-        return (
-          <Card.Description>
-            Due: {format(new Date(duedate), ('dd/MM/yyyy  hh:mm a'))}
-          </Card.Description>
-        );
-      }
-    }
+    // function getDate(duedate) {
+    //   if (duedate !== null) {
+    //     return (
+    //       <Card.Description>
+    //         Due: {format(new Date(duedate), ('dd/MM/yyyy  hh:mm a'))}
+    //       </Card.Description>
+    //     );
+    //   }
+    // }
 
-    const allTasks = tasks.map(task => (
-      <Card key={task.id}>
-        <Card.Content>
-          <div>
-            <TaskCheckbox
-              style={{ float: "left" }}
-              label={task.name}
-              task_status={task.done}
-              refresh={this.getTasks}
-              task_id={task.id}
-            />
-            <Icon
-              style={{ float: "right" }}
-              link name="alternate pencil"
-              color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
-              onClick={() => this.editTask(task.id)} />
-          </div>
-          <Card.Description>
-            <p>{task.description}</p>
-          </Card.Description>
-          {getDate(task.duedate)}
-        </Card.Content>
-        {getTags(task.tags)}
-      </Card>
-    ));
+    // const allTasks = tasks.map(task => (
+    //   <Card key={task.id}>
+    //     <Card.Content>
+    //       <div>
+    //         <TaskCheckbox
+    //           style={{ float: "left" }}
+    //           label={task.name}
+    //           task_status={task.done}
+    //           refresh={this.getTasks}
+    //           task_id={task.id}
+    //         />
+    //         <Icon
+    //           style={{ float: "right" }}
+    //           link name="alternate pencil"
+    //           color={this.props.editing && (this.props.taskid == task.id) ? "black" : "grey"}
+    //           onClick={() => this.editTask(task.id)} />
+    //       </div>
+    //       <Card.Description>
+    //         <p>{task.description}</p>
+    //       </Card.Description>
+    //       {getDate(task.duedate)}
+    //     </Card.Content>
+    //     {getTags(task.tags)}
+    //   </Card>
+    // ));
 
     //If no tasks
     const noTask = (
@@ -125,7 +127,14 @@ class TaskList extends React.Component {
         </Card.Content>
         <Card.Content className="main-list">
           <div className="row">
-            {this.state.tasks.length > 0 ? allTasks : noTask}
+            {/* {this.state.tasks.length > 0 ? allTasks : noTask} */}
+            {this.state.tasks.length > 0 ?
+              <TaskCards
+                tasks={this.state.tasks}
+                editTask={this.editTask}
+                getTasks={this.getTasks}
+              />
+              : noTask}
           </div>
         </Card.Content>
       </Card>

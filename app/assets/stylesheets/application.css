@@ -168,3 +168,31 @@
 .signup-form {
   padding-top: 150px;
 }
+
+.search-component {
+  padding-top: 15px;
+}
+
+.search-bar {
+  float: left;
+  width: 60%
+}
+.search-button {
+  float: left;
+  padding-top: 15px;
+}
+
+.search-results {
+  width: inherit;
+}
+
+.search-body {
+  min-width: inherit;
+  min-height: 140px;
+}
+
+.tagslist {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
