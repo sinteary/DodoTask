@@ -13,7 +13,6 @@ class TaskCheckbox extends Component {
   toggleTaskDone = () => {
     const url = `/api/v1/tasks/${this.props.task_id}`
     let curr_status = this.state.checked;
-    // console.log("EDIT TASK: " + this.props.task_id + " from " + curr_status);
     Axios.put(url, {
       done: !curr_status,
       tags: ["MARK000"] //secret placeholder that is unlikely to be used as a real tag
@@ -25,8 +24,9 @@ class TaskCheckbox extends Component {
           checked: response.data.done
         })
       })
-      .catch(error => console.log(error));
-
+      .catch(error => {
+        console.log("ERROR MARKING TASK DONE", error)
+      });
   }
 
   render() {

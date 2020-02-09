@@ -1,6 +1,6 @@
 import React from "react";
 import 'semantic-ui-css/semantic.css';
-import { Search, Form, Button, Grid, Container, Card, Header, Segment } from 'semantic-ui-react';
+import { Form, Button, Grid, Container, Header, Segment } from 'semantic-ui-react';
 import Axios from "axios";
 import TagsBar from "../Common/TagsBar";
 import TaskCards from "../Common/TaskCards";
@@ -42,6 +42,7 @@ class SearchManager extends React.Component {
     }
   }
 
+  //Retrieves searched tags
   handleSearch() {
     console.log("QUERIES:", this.state.queries);
     const url = `/tags`;
@@ -89,7 +90,6 @@ class SearchManager extends React.Component {
 
     return (
       <div>
-
         <div className="search-body">
           <div>
             <div className="search-component">
@@ -105,15 +105,12 @@ class SearchManager extends React.Component {
               </div>
             </div>
           </div>
-
         </div>
-
         <div>
           <Grid>
             {allTagslist}
           </Grid>
         </div>
-
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import React from 'react';
-import Axios from "axios";
-import TaskCheckbox from "../Buttons/TaskCheckbox";
-import { Card, Icon, Button, Label, Checkbox } from 'semantic-ui-react';
-import { format, compareAsc } from 'date-fns'
+import TaskCheckbox from "./TaskCheckbox";
+import { Card, Icon, Label } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.css';
+import { format } from 'date-fns'
 
+//Component for displaying tasks in the form of cards. Used in both search and display
 class TaskCards extends React.Component {
   constructor(props) {
     super(props);

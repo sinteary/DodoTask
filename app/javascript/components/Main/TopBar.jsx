@@ -1,22 +1,10 @@
-import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import React from 'react';
 
 class TopBar extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     search_tags: []
-  //   };
-
-  // }
-
   state = {}
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-
   render() {
-    const { activeItem } = this.state
-
     return (
       <div className="ui menu">
         <a className="item" onClick={this.props.disableSearch}>Home</a>
@@ -25,9 +13,7 @@ class TopBar extends React.Component {
         <a className="item">Dashboard (Coming soon!)</a>
       </div>
     )
-
   }
-
 }
 
 export default TopBar;

@@ -28,6 +28,10 @@ class TaskListsManager extends React.Component {
     this.getTaskLists();
   }
 
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   getTaskLists() {
     const url = `/users/${this.props.user_id}`;
     Axios.get(url)
@@ -38,7 +42,7 @@ class TaskListsManager extends React.Component {
         })
       })
       .catch(error => {
-        console.log(error);
+        console.log("ERROR FETCHING TASKLISTS:", error);
       })
   }
 
@@ -55,7 +59,7 @@ class TaskListsManager extends React.Component {
       user_id: this.props.user_id
     })
       .then(response => {
-        console.log(response);
+        console.log("TASKLIST CREATED", response.data);
         this.getTaskLists();
         this.setState({
           editor_open: false
@@ -66,20 +70,16 @@ class TaskListsManager extends React.Component {
       })
   }
 
-  editTask = (id) => {
-    this.props.editTask(id);
-  }
-
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
   toggleEditTasklist(id) {
-    console.log("EDIT TASKLIST" + id);
+    console.log("EDIT TASKLIST " + id);
     this.setState({
       editing_tasklist: !this.state.editing_tasklist,
       tasklist_id: id
     })
+  }
+
+  editTask = (id) => {
+    this.props.editTask(id);
   }
 
   saveEditChanges() {
@@ -93,24 +93,25 @@ class TaskListsManager extends React.Component {
         this.getTaskLists();
       })
       .catch(error => {
-        console.log(error);
+        console.log("ERROR SAVING EDITS", error);
       })
   }
 
   deleteTasklist() {
-    console.log("DELETING: ", this.state.tasklist_id);
+    console.log("DELETING:", this.state.tasklist_id);
     const url = `tasklists/${this.state.tasklist_id}`;
     Axios.delete(url)
       .then(response => {
-        console.log("DELETED TASKLIST: ", response);
+        console.log("DELETED TASKLIST:", response);
         this.toggleEditTasklist(null);
         this.getTaskLists();
       })
       .catch(error => {
-        console.log(error)
+        console.log("ERROR DELETING TASKLIST:", error)
       })
   }
 
+  //prevProps is unused, but included for proper functionality
   componentDidUpdate(prevProps, prevState) {
     if (this.state.tasklist_id !== prevState.tasklist_id) {
       console.log("EDITING TASKLIST: " + this.state.tasklist_id)

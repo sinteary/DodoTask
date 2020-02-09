@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Form, Grid, Divider, Header, Segment, Button } from 'semantic-ui-react';
+import { Form, Grid, Header, Segment, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.css';
+
+//Code referenced from: https://medium.com/how-i-get-it/react-with-rails-user-authentication-8977e98762f2
 
 class Signup extends Component {
   constructor(props) {
@@ -34,18 +36,18 @@ class Signup extends Component {
       .then(response => {
         if (response.data.status === 'created') {
           this.props.handleLogin(response.data)
-          console.log("successful creation")
-          this.redirect()
+          console.log("USER SUCCESSFULLY CREATED")
+          this.redirectToLogin()
         } else {
           this.setState({
             errors: response.data.errors
           })
         }
       })
-      .catch(error => console.log('api errors:', error))
+      .catch(error => console.log('ERROR CREATING USER:', error))
   };
 
-  redirect = () => {
+  redirectToLogin = () => {
     this.props.history.push('/')
   }
 

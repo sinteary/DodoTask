@@ -1,10 +1,10 @@
 import React from "react";
 import TaskEditor from "./TaskEditor";
-import 'semantic-ui-css/semantic.css';
 import TopBar from "./TopBar";
 import TaskListsManager from "./TaskLists/TasklistsManager";
 import SearchManager from "./SearchManager";
 import { Sidebar } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.css';
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -108,7 +108,6 @@ class TaskPage extends React.Component {
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           </div>
-
           <div className="task-display">
             <div className="top-menu-bar">
               <TopBar
@@ -138,13 +137,10 @@ class TaskPage extends React.Component {
               </div>
             }
           </div>
-
         </div>
       </>
     );
-
   }
-
 }
 
 export default TaskPage;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Link, Redirect } from 'react-router-dom'
 import { Button, Divider, Form, Grid, Segment, Header } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.css';
 
+//Code referenced from: https://medium.com/how-i-get-it/react-with-rails-user-authentication-8977e98762f2
 
 class Login extends Component {
   constructor(props) {
@@ -58,11 +58,11 @@ class Login extends Component {
           })
         }
       })
-      .catch(error => console.log('api errors:', error))
+      .catch(error => console.log('ERROR ON LOGIN:', error))
   };
 
   redirectToSignup = () => {
-    console.log("redirect to signup");
+    console.log("REDIRECT TO SIGNUP");
     this.props.history.push('/signup')
   }
 
@@ -103,15 +103,11 @@ class Login extends Component {
                 <Button content='Sign up' icon='signup' size='big' onClick={this.redirectToSignup} />
               </Grid.Column>
             </Grid>
-
             <Divider vertical>Or</Divider>
           </Segment>
           <div>
-            {
-              this.state.errors ? this.handleErrors() : null
-            }
+            {this.state.errors ? this.handleErrors() : null}
           </div>
-
         </div >
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, Label } from 'semantic-ui-react';
-import Axios from "axios";
 
+//Form for inputting tags. Used to create/edit tasks or searching for tasks by tags.
 class TagsBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +27,6 @@ class TagsBar extends React.Component {
 			if (!this.props.current_tags.includes(tag_name)) {
 				this.props.current_tags.push(tag_name);
 				console.log("TAG ADDED: ", tag_name);
-				console.log(this.props.current_tags);
 			}
 			this.setState({
 				input: ""
@@ -37,7 +36,7 @@ class TagsBar extends React.Component {
 
 	deleteTag(index) {
 		this.props.current_tags.splice(index, 1);
-		console.log(this.props.current_tags);
+		console.log("TAG DELETED");
 		this.forceUpdate();
 	}
 
