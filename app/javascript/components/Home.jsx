@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Axios from "axios";
 
 export default () => (
   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">

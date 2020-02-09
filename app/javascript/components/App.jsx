@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
+import Login from "./Authentication/Login";
+import Signup from "./Authentication/Signup";
 import Axios from "axios";
-import TaskPage from "./Tasks";
+import TaskPage from "./Main/Tasks";
 import 'semantic-ui-css/semantic.css';
 
 class App extends React.Component {
@@ -75,7 +75,6 @@ class App extends React.Component {
                   user_id={this.state.user.id}
                 />
               )}
-
             />
           </Switch>
         </BrowserRouter>
